@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>5QQdLGKQMCL8V0WYgCLQe1znxkufYPnfpi2pbnAcSbU=_1</activeVersionIdentifier>
+    <description>Query available Programs and determine the best fit for a client&apos;s interests.</description>
+    <developerName>Program_Agent_Find_Appropriate_Program</developerName>
+    <masterLabel>Program Agent: Find Appropriate Program</masterLabel>
+    <templateVersions>
+        <content>You are a program coordinator and case manager at a nonprofit organization. Review the following request from a potential client, and then identify the top two programs from those offered at your organization. Highlight the reasons why these programs fit the needs identified in the request.
+
+Client Inquiry: {!$Input:clientRequest}
+Programs: {!$Input:jsonInput}
+</content>
+        <inputs>
+            <apiName>jsonInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>jsonInput</masterLabel>
+            <referenceName>Input:jsonInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>clientRequest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>clientRequest</masterLabel>
+            <referenceName>Input:clientRequest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>5QQdLGKQMCL8V0WYgCLQe1znxkufYPnfpi2pbnAcSbU=_1</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

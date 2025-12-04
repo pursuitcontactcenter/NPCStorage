@@ -1,0 +1,2201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_25</activeVersionIdentifier>
+    <description>Review donors who are good candidates for fundraising campaigns based on Program interest and giving history.</description>
+    <developerName>Fundraising_Agent_Program_Evaluation</developerName>
+    <masterLabel>Fundraising Agent: Program Evaluation</masterLabel>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSON inputs representing data about donors for this organization. Create an output summary ranking the top 3 donors (Accounts) most likely to donate to a fundraising campaign using the criteria below:
+
+1. Review the donation history related to the program
+Input: {!$Input:giftInput}
+Identify donors (Accounts) tied to GiftTransaction records that are linked to the program via a GiftTransactionDesignation.
+Rank these donors by the total Amount of their GiftTransactions related to this program.
+This measure carries the most weight in the overall ranking.
+2. Review the program interests of donors
+Input: {!$Input:programInterest}
+Identify donors (Accounts) who have Interest Tags aligned to the program’s mission.
+All donors with the appropriate interest should be considered equally ranked in this category.
+3. Review the volunteer interests of donors
+Input: {!$Input:volInterest}
+Identify donors (Accounts) with Interest Tags related to volunteerism.
+Rank these donors by the number of tags they have — more tags suggest higher engagement potential.
+
+🧮 Final Donor Ranking Logic
+Donors appearing on all three lists should be ranked highest, ordered by total Gift Transaction amounts.
+Donors appearing on two out of the three lists should be ranked next, sorted alphabetically.
+Compile a final ranking of the top 5 donors based on these rules.
+
+🔗 Output Formatting Instructions (HTML Rich Text) Your final output must be in HTML rich text format suitable for a Salesforce Rich Text field.
+Headings: Wrap all paragraph titles in bold tags.
+Example: &lt;b&gt;Top Historical Donors to this Program&lt;/b&gt;
+Hyperlink Formatting: When you reference an Account, its name MUST be a clickable hyperlink pointing to its Salesforce record.
+Use the HTML &lt;a&gt; tag for all links. Do NOT use Markdown []() syntax.
+The URL structure is: https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view
+Correct HTML Example: &lt;a href=&quot;https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZciGYAT/view&quot;&gt;Krystal Mccall&lt;/a&gt;
+This will render as a clickable name, Krystal Mccall, without showing the raw URL.
+Final Output Structure:
+The entire response should be a single block of HTML rich text.
+Do not include &lt;html&gt;, &lt;body&gt;, or backticks (e.g., ```html) in the output. The response should begin directly with the first heading.
+Use bulleted lists (&lt;ul&gt; and &lt;li&gt; tags) for the lists of donors, or simple line breaks (&lt;br&gt;) if more appropriate for the sentence structure.
+
+
+***Good Output Format because Krystal Mccall (and all other Account names) is a clickable hyperlink to the Account record, and the URL is not shown to the user
+Top Historical Donors to this Program
+
+Krystal Mccall - This donor has the highest gift transaction amount of $19,975, indicating strong financial support for the program.
+
+Interested Donors
+
+Alex Garcia - This donor has expressed interest in the program and has a total of $11,460 in gifts.
+
+Interested Volunteers
+
+Walter Craig - With three volunteer interest tags, this donor demonstrates a strong commitment to the organization&apos;s mission.
+
+
+Most Likely to Donate, overall
+
+Krystal Mccall - Ranked highest due to significant contributions and interest in the program.
+
+Omega Financial Services - Strong financial support combined with program interest positions this donor well.
+
+Omega, Inc. - A solid donor with a history of contributions and interest in the program.
+
+Alex Garcia - This donor&apos;s previous gifts and interest in the program make them a viable candidate for future donations.
+
+James Melendez - With a combination of interest in the program and previous contributions, this donor is positioned to support future initiatives.
+
+***Incorrect format, because of the opening and closing markup as well as missing any explanations:
+
+```html
+Top Historical Donors to this Program
+
+Krystal Mccall
+
+Omega Financial Services
+
+Omega, Inc.
+
+
+
+Interested Donors
+
+Alex Garcia
+
+Javier Zimmerman
+
+James Melendez
+
+
+
+Interested Volunteers
+
+Walter Craig - 3 tags
+
+Raymond Oneal - 2 tags
+
+James Melendez - 1 tag
+
+
+
+Most Likely to Donate, overall
+
+Krystal Mccall
+
+Omega Financial Services
+
+Omega, Inc.
+
+Alex Garcia
+
+James Melendez
+
+
+```
+
+***Incorrect output because raw URL is shown, rather than a clickable rich text hyperlink
+Top Historical Donors to this Program
+
+[Krystal Mccall](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZciGYAT/view) - This donor has the highest gift transaction amount of $19,975, indicating strong financial support for the program.
+
+[Omega Financial Services](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZcvyYAD/view) - With a total of $18,400 in contributions, this donor demonstrates significant engagement with the program.
+
+[Omega, Inc.](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZbKTYA1/view) - Contributing $8,950, this donor ranks third based on their substantial gift history.
+
+Interested Donors
+
+[Alex Garcia](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZbKXYA1/view) - This donor has expressed interest in the program and has a total of $11,460 in gifts.
+
+[Javier Zimmerman](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZcsOYAT/view) - While not a top contributor, this donor&apos;s interest in the program aligns with their previous support.
+
+[James Melendez](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctLYAT/view) - This donor has shown interest in the program, enhancing their potential for future contributions.
+
+Interested Volunteers
+
+[Walter Craig](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctfYAD/view) - With three volunteer interest tags, this donor demonstrates a strong commitment to the organization&apos;s mission.
+
+[Raymond Oneal](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctYYAT/view) - This donor has two volunteer tags, indicating an active interest in supporting the organization through volunteer efforts.
+
+[James Melendez](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctLYAT/view) - With one volunteer interest tag, this donor shows a willingness to engage in volunteer opportunities.
+
+Most Likely to Donate, overall
+
+[Krystal Mccall](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZciGYAT/view) - Ranked highest due to significant contributions and interest in the program.
+
+[Omega Financial Services](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZcvyYAD/view) - Strong financial support combined with program interest positions this donor well.
+
+[Omega, Inc.](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZbKTYA1/view) - A solid donor with a history of contributions and interest in the program.
+
+[Alex Garcia](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZbKXYA1/view) - This donor&apos;s previous gifts and interest in the program make them a viable candidate for future donations.
+
+[James Melendez](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctLYAT/view) - With a combination of interest in the program and previous contributions, this donor is positioned to support future initiatives.
+</content>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_25</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSONs representing data about donors for this organization. Create an output summary ranking the 3 donors (Accounts) that are most likely to donate to fundraising campaign based on these weights:
+
+
+1) Review the donation history related to the program: {!$Input:giftInput}
+Based on this data, identify donors (Accounts) tied to GiftTransaction records based on a GiftTransactionDesignation tied to the given Program. Rank the donors based on the Amount of their GiftTransactions. This ranking should carry the most weight.
+2) Review the program interests of donors related to the program: {!$Input:programInterest}
+Based on this data, identify constituents (Accounts) with Interest Tags aligned to this program&apos;s mission. All donors with the appropriate interest should be ranked equally.
+3) Review the volunteer interests of donors related to the program: {!$Input:volInterest}
+Based on this data, identify donors (Accounts) with Interest Tags aligned to volunteerism. Rank donors based on the number of tags they have, which correlates with their overall willingness to engage with your organization.
+
+After creating the three lists, identify any donors (Accounts) that are on all 3 lists and rank them the most highly, ordered by their Gift Transaction amount totals. After these, identify any donors that are on 2 of the 3 lists and rank them alphabetically. 
+
+Compile a single final ranking of the top 5 most likely donors, ordered by [donors on all 3 lists, ordered by descending Gift Transaction totals] then [donors on 2 lists, alphabetical]. For each donor, provide a brief summary of why they are ranked where they are.
+</content>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_1</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSONs representing data about donors for this organization. Create an output summary ranking the 3 donors (Accounts) that are most likely to donate to fundraising campaign based on these weights:
+
+
+1) Review the donation history related to the program: {!$Input:giftInput}
+Based on this data, identify donors (Accounts) tied to GiftTransaction records based on a GiftTransactionDesignation tied to the given Program. Rank the donors based on the Amount of their GiftTransactions. This ranking should carry the most weight.
+2) Review the program interests of donors related to the program: {!$Input:programInterest}
+Based on this data, identify constituents (Accounts) with Interest Tags aligned to this program&apos;s mission. All donors with the appropriate interest should be ranked equally.
+3) Review the volunteer interests of donors related to the program: {!$Input:volInterest}
+Based on this data, identify donors (Accounts) with Interest Tags aligned to volunteerism. Rank donors based on the number of tags they have, which correlates with their overall willingness to engage with your organization.
+
+After creating the three lists, identify any donors (Accounts) that are on all 3 lists and rank them the most highly, ordered by their Gift Transaction amount totals. After these, identify any donors that are on 2 of the 3 lists and rank them alphabetically. 
+
+Compile a single final ranking of the top 5 most likely donors, ordered by [donors on all 3 lists, ordered by descending Gift Transaction totals] then [donors on 2 lists, alphabetical]. For each donor, provide a brief summary of why they are ranked where they are. The output should be formatted like this:
+
+&quot;Top Historical Donors to this Program
+
+[donor ranked 1 on gift transaction measure]
+[donor ranked 2 on gift transaction measure]
+[donor ranked 3 on gift transaction measure]
+
+Interested Donors
+
+[alphabetical list of first 3 donors appearing on ProgramInterest]
+
+Interested Volunteers
+
+[ranked list based on volunteer interest]
+
+Most Likely to Donate, overall
+
+[final ranking of top 5 donors]&quot;
+</content>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_2</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSONs representing data about donors for this organization. Create an output summary ranking the 3 donors (Accounts) that are most likely to donate to a fundraising campaign based on these weights:
+Review the donation history related to the program: {!$Input:giftInput}
+Identify donors (Accounts) tied to GiftTransaction records that are linked to the program via a GiftTransactionDesignation.
+Rank the donors based on the total Amount of their GiftTransactions related to this program.
+This ranking should carry the most weight.
+Review the program interests of donors related to the program: {!$Input:programInterest}
+Identify donors (Accounts) who have Interest Tags aligned to this program’s mission.
+All donors with the relevant interest should be considered equal in this category.
+Review the volunteer interests of donors: {!$Input:volInterest}
+Identify donors (Accounts) with Interest Tags related to volunteerism.
+Rank them based on the number of tags they have — more tags indicates greater willingness to engage.
+After creating the three individual lists:
+Identify any donors (Accounts) that appear in all 3 lists, and rank them highest, ordered by Gift Transaction totals.
+Then identify donors that appear in 2 out of the 3 lists, and rank them alphabetically.
+Output Format:
+When listing donors, include a hyperlink to the donor’s record using this format:
+
+
+[Donor Name](
+https://example.salesforce.com/{AccountId})
+Replace {AccountId} with the actual ID or URL field from the donor’s record.
+Use the following structure for your output:Top Historical Donors to this Program
+Donor Name 1
+Donor Name 2
+Donor Name 3
+Interested Donors
+Donor A
+Donor B
+Donor C
+Interested Volunteers
+Donor X — 5 tags
+Donor Y — 3 tags
+Donor Z — 2 tags
+Most Likely to Donate, Overall
+Donor Name 1 — Appears on all 3 lists, highest giving history
+Donor Name 2 — Appears on all 3 lists, second highest giving
+Donor Name 3 — Appears on 2 lists, alphabetically ranked
+Donor Name 4 — Appears on 2 lists, alphabetically ranked
+Donor Name 5 — Appears on 2 lists, alphabetically ranked
+
+</content>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_3</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSONs representing data about donors for this organization. Create an output summary ranking the 3 donors (Accounts) that are most likely to donate to a fundraising campaign based on the following weighted criteria:
+ 1. Gift History (most heavily weighted)
+Review the donation history related to the program: {!$Input:giftInput}
+Identify donors (Accounts) tied to GiftTransaction records linked to the given program via a GiftTransactionDesignation.
+Rank these donors by the total Amount of their GiftTransactions.
+This measure should carry the highest weight in determining likelihood to donate.
+
+ 2. Program Interests
+Review the donors&apos; program-related interests: {!$Input:programInterest}
+Identify donors (Accounts) who have Interest Tags aligned with the program’s mission.
+All matching donors should be ranked equally in this category.
+
+ 3. Volunteer Interests
+Review volunteer-related interests: {!$Input:volInterest}
+Identify donors (Accounts) with Interest Tags related to volunteerism.
+Rank these donors by the number of volunteer-related tags they have — more tags indicate greater potential for organizational engagement.
+
+ Ranking Instructions
+Identify donors who appear on all 3 lists — rank these highest, ordered by their total Gift Transaction Amounts.
+Then identify donors who appear on 2 of the 3 lists — rank these next, in alphabetical order.
+Compile a final ranked list of the top 5 most likely donors to give to this campaign.
+
+ Donor Link Format
+When listing donors, display their name as a clickable link to their Salesforce Account record. Do not show the raw URL. Use one of the following formats based on your environment:
+
+ If the output will be rendered as Markdown:
+less
+
+[Donor Name](
+https://example.salesforce.com/{AccountId})
+
+ If the output will be rendered as HTML:
+php-template
+
+&lt;a href=&quot;
+https://example.salesforce.com/{AccountId}&quot;&gt;Donor Name&lt;/a&gt;
+Choose the appropriate format to ensure that only the donor name appears as a hyperlink.
+ Output Structure
+Format your final summary like this:Top Historical Donors to this Program
+Donor Name 1
+Donor Name 2
+Donor Name 3
+Interested Donors
+Donor A
+Donor B
+Donor C
+Interested Volunteers
+Donor X — 5 tags
+Donor Y — 3 tags
+Donor Z — 2 tags
+Most Likely to Donate, Overall
+Donor Name 1 — Appears on all 3 lists, highest giving history
+Donor Name 2 — Appears on all 3 lists, second highest giving
+Donor Name 3 — Appears on 2 lists, alphabetically ranked
+Donor Name 4 — Appears on 2 lists, alphabetically ranked
+Donor Name 5 — Appears on 2 lists, alphabetically ranked
+
+</content>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_4</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSONs representing data about donors for this organization. Create an output summary ranking the 3 donors (Accounts) that are most likely to donate to a fundraising campaign based on the following weighted criteria:
+ 1. Gift History (most heavily weighted)
+Review the donation history related to the program: {!$Input:giftInput}
+Identify donors (Accounts) tied to GiftTransaction records linked to the given program via a GiftTransactionDesignation.
+Rank these donors by the total Amount of their GiftTransactions.
+This measure should carry the highest weight in determining likelihood to donate.
+
+ 2. Program Interests
+Review the donors&apos; program-related interests: {!$Input:programInterest}
+Identify donors (Accounts) who have Interest Tags aligned with the program’s mission.
+All matching donors should be ranked equally in this category.
+
+ 3. Volunteer Interests
+Review volunteer-related interests: {!$Input:volInterest}
+Identify donors (Accounts) with Interest Tags related to volunteerism.
+Rank these donors by the number of volunteer-related tags they have — more tags indicate greater potential for organizational engagement.
+
+ Ranking Instructions
+Identify donors who appear on all 3 lists — rank these highest, ordered by their total Gift Transaction Amounts.
+Then identify donors who appear on 2 of the 3 lists — rank these next, in alphabetical order.
+Compile a final ranked list of the top 5 most likely donors to give to this campaign.
+
+ Donor Link Format
+When listing donors, display their name as a clickable link to their Salesforce Account record. Do not show the raw URL. Use one of the following formats based on your environment:
+
+Use this format to hyperlink the donor name to their Salesforce Account record (rendered as HTML):
+&lt;a href=&quot;https://example.salesforce.com/{AccountId}&quot;&gt;Donor Name&lt;/a&gt;
+Only the donor name should appear as a clickable link. Do not show the raw URL.
+
+Output Structure
+Format your final summary like this, using HTML tags to ensure clean rendering:
+&lt;h3&gt;Top Historical Donors to this Program&lt;/h3&gt;
+&lt;ul&gt;
+ &lt;li&gt;&lt;a href=&quot;https://example.salesforce.com/{AccountId1}&quot;&gt;Donor Name 1&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;https://example.salesforce.com/{AccountId2}&quot;&gt;Donor Name 2&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;https://example.salesforce.com/{AccountId3}&quot;&gt;Donor Name 3&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Interested Donors&lt;/h3&gt;
+&lt;ul&gt;
+ &lt;li&gt;&lt;a href=&quot;https://example.salesforce.com/{AccountIdA}&quot;&gt;Donor A&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;https://example.salesforce.com/{AccountIdB}&quot;&gt;Donor B&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;https://example.salesforce.com/{AccountIdC}&quot;&gt;Donor C&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Interested Volunteers&lt;/h3&gt;
+&lt;ul&gt;
+ &lt;li&gt;&lt;a href=&quot;https://example.salesforce.com/{AccountIdX}&quot;&gt;Donor X&lt;/a&gt; — 5 tags&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;https://example.salesforce.com/{AccountIdY}&quot;&gt;Donor Y&lt;/a&gt; — 3 tags&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;https://example.salesforce.com/{AccountIdZ}&quot;&gt;Donor Z&lt;/a&gt; — 2 tags&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Most Likely to Donate, Overall&lt;/h3&gt;
+&lt;ul&gt;
+ &lt;li&gt;&lt;a href=&quot;https://example.salesforce.com/{AccountId1}&quot;&gt;Donor Name 1&lt;/a&gt; — Appears on all 3 lists, highest giving history&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;https://example.salesforce.com/{AccountId2}&quot;&gt;Donor Name 2&lt;/a&gt; — Appears on all 3 lists, second highest giving&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;https://example.salesforce.com/{AccountIdA}&quot;&gt;Donor Name 3&lt;/a&gt; — Appears on 2 lists, alphabetically ranked&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;https://example.salesforce.com/{AccountIdB}&quot;&gt;Donor Name 4&lt;/a&gt; — Appears on 2 lists, alphabetically ranked&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;https://example.salesforce.com/{AccountIdC}&quot;&gt;Donor Name 5&lt;/a&gt; — Appears on 2 lists, alphabetically ranked&lt;/li&gt;
+&lt;/ul&gt;
+
+
+</content>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_5</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSONs representing data about donors for this organization. Create an output summary ranking the 3 donors (Accounts) that are most likely to donate to a fundraising campaign based on these weights:
+Review the donation history related to the program: {!$Input:giftInput}
+Identify donors (Accounts) tied to GiftTransaction records that are linked to the program via a GiftTransactionDesignation.
+Rank the donors based on the total Amount of their GiftTransactions related to this program.
+This ranking should carry the most weight.
+Review the program interests of donors related to the program: {!$Input:programInterest}
+Identify donors (Accounts) who have Interest Tags aligned to this program’s mission.
+All donors with the relevant interest should be considered equal in this category.
+Review the volunteer interests of donors: {!$Input:volInterest}
+Identify donors (Accounts) with Interest Tags related to volunteerism.
+Rank them based on the number of tags they have — more tags indicates greater willingness to engage.
+After creating the three individual lists:
+Identify any donors (Accounts) that appear in all 3 lists, and rank them highest, ordered by Gift Transaction totals.
+Then identify donors that appear in 2 out of the 3 lists, and rank them alphabetically.
+Output Format:
+When listing donors, include a hyperlink to the donor’s record using this format:
+
+
+[Donor Name]
+(https://example.salesforce.com/{AccountId})
+Only the donor name should appear as a clickable link. Do not show the raw URL.
+Replace {AccountId} with the actual ID or URL field from the donor’s record.
+Use the following structure for your output:Top Historical Donors to this Program
+Donor Name 1
+Donor Name 2
+Donor Name 3
+Interested Donors
+Donor A
+Donor B
+Donor C
+Interested Volunteers
+Donor X — 5 tags
+Donor Y — 3 tags
+Donor Z — 2 tags
+Most Likely to Donate, Overall
+Donor Name 1 — Appears on all 3 lists, highest giving history
+Donor Name 2 — Appears on all 3 lists, second highest giving
+Donor Name 3 — Appears on 2 lists, alphabetically ranked
+Donor Name 4 — Appears on 2 lists, alphabetically ranked
+Donor Name 5 — Appears on 2 lists, alphabetically ranked
+
+</content>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_6</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSONs representing data about donors for this organization. Create an output summary ranking the 3 donors (Accounts) that are most likely to donate to fundraising campaign based on these weights:
+
+
+1) Review the donation history related to the program: {!$Input:giftInput}
+Based on this data, identify donors (Accounts) tied to GiftTransaction records based on a GiftTransactionDesignation tied to the given Program. Rank the donors based on the Amount of their GiftTransactions. This ranking should carry the most weight.
+2) Review the program interests of donors related to the program: {!$Input:programInterest}
+Based on this data, identify constituents (Accounts) with Interest Tags aligned to this program&apos;s mission. All donors with the appropriate interest should be ranked equally.
+3) Review the volunteer interests of donors related to the program: {!$Input:volInterest}
+Based on this data, identify donors (Accounts) with Interest Tags aligned to volunteerism. Rank donors based on the number of tags they have, which correlates with their overall willingness to engage with your organization.
+
+After creating the three lists, identify any donors (Accounts) that are on all 3 lists and rank them the most highly, ordered by their Gift Transaction amount totals. After these, identify any donors that are on 2 of the 3 lists and rank them alphabetically. 
+
+Compile a single final ranking of the top 5 most likely donors, ordered by [donors on all 3 lists, ordered by descending Gift Transaction totals] then [donors on 2 lists, alphabetical]. For each donor, provide a brief summary of why they are ranked where they are. The output should be formatted like this:
+
+&quot;Top Historical Donors to this Program
+
+[donor ranked 1 on gift transaction measure}], format to show only the donor&apos;s name as a clickable link. do not show raw URL.
+[donor ranked 2 on gift transaction measure]
+[donor ranked 3 on gift transaction measure]
+
+Interested Donors
+
+[alphabetical list of first 3 donors appearing on ProgramInterest]
+
+Interested Volunteers
+
+[ranked list based on volunteer interest]
+
+Most Likely to Donate, overall
+
+[final ranking of top 5 donors]&quot;
+</content>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Draft</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_11</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSONs representing data about donors for this organization. Create an output summary ranking the 3 donors (Accounts) that are most likely to donate to a fundraising campaign based on these weights:
+Review the donation history related to the program: {!$Input:giftInput}
+Identify donors (Accounts) tied to GiftTransaction records that are linked to the program via a GiftTransactionDesignation.
+Rank the donors based on the total Amount of their GiftTransactions related to this program.
+This ranking should carry the most weight.
+Review the program interests of donors related to the program: {!$Input:programInterest}
+Identify donors (Accounts) who have Interest Tags aligned to this program’s mission.
+All donors with the relevant interest should be considered equal in this category.
+Review the volunteer interests of donors: {!$Input:volInterest}
+Identify donors (Accounts) with Interest Tags related to volunteerism.
+Rank them based on the number of tags they have — more tags indicates greater willingness to engage.
+After creating the three individual lists:
+Identify any donors (Accounts) that appear in all 3 lists, and rank them highest, ordered by Gift Transaction totals.
+Then identify donors that appear in 2 out of the 3 lists, and rank them alphabetically.
+Output Format:
+When listing donors, include a hyperlink to the donor’s record using this format:
+
+
+[Donor Name]
+(https://example.salesforce.com/{AccountId})
+Only the donor name should appear as a clickable link. Do not show the raw URL.
+
+
+
+Use the following structure for your output:Top Historical Donors to this Program
+Donor Name 1
+Donor Name 2
+Donor Name 3
+Interested Donors
+Donor A
+Donor B
+Donor C
+Interested Volunteers
+Donor X — 5 tags
+Donor Y — 3 tags
+Donor Z — 2 tags
+Most Likely to Donate, Overall
+Donor Name 1 — Appears on all 3 lists, highest giving history
+Donor Name 2 — Appears on all 3 lists, second highest giving
+Donor Name 3 — Appears on 2 lists, alphabetically ranked
+Donor Name 4 — Appears on 2 lists, alphabetically ranked
+Donor Name 5 — Appears on 2 lists, alphabetically ranked
+
+</content>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_7</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSONs representing data about donors for this organization. Create an output summary ranking the 3 donors (Accounts) that are most likely to donate to fundraising campaign based on these weights:
+
+
+1) Review the donation history related to the program: {!$Input:giftInput}
+Based on this data, identify donors (Accounts) tied to GiftTransaction records based on a GiftTransactionDesignation tied to the given Program. Rank the donors based on the Amount of their GiftTransactions. This ranking should carry the most weight.
+2) Review the program interests of donors related to the program: {!$Input:programInterest}
+Based on this data, identify constituents (Accounts) with Interest Tags aligned to this program&apos;s mission. All donors with the appropriate interest should be ranked equally.
+3) Review the volunteer interests of donors related to the program: {!$Input:volInterest}
+Based on this data, identify donors (Accounts) with Interest Tags aligned to volunteerism. Rank donors based on the number of tags they have, which correlates with their overall willingness to engage with your organization.
+
+After creating the three lists, identify any donors (Accounts) that are on all 3 lists and rank them the most highly, ordered by their Gift Transaction amount totals. After these, identify any donors that are on 2 of the 3 lists and rank them alphabetically. 
+
+Compile a single final ranking of the top 5 most likely donors, ordered by [donors on all 3 lists, ordered by descending Gift Transaction totals] then [donors on 2 lists, alphabetical]. For each donor, provide a brief summary of why they are ranked where they are. The output should be formatted like this:
+
+&quot;Top Historical Donors to this Program
+
+[donor ranked 1 on gift transaction measure] format as a hyperlink to the record, only showing the donor&apos;s name. Make the user experience easy where they can drill right into that record from the agent window.
+[donor ranked 2 on gift transaction measure]
+[donor ranked 3 on gift transaction measure]
+
+Interested Donors
+
+[alphabetical list of first 3 donors appearing on ProgramInterest]
+
+Interested Volunteers
+
+[ranked list based on volunteer interest]
+
+Most Likely to Donate, overall
+
+[final ranking of top 5 donors]&quot;
+</content>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_8</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSONs representing data about donors for this organization. Create an output summary ranking the 3 donors (Accounts) that are most likely to donate to fundraising campaign based on these weights:
+
+
+1) Review the donation history related to the program: {!$Input:giftInput}
+Based on this data, identify donors (Accounts) tied to GiftTransaction records based on a GiftTransactionDesignation tied to the given Program. Rank the donors based on the Amount of their GiftTransactions. This ranking should carry the most weight.
+2) Review the program interests of donors related to the program: {!$Input:programInterest}
+Based on this data, identify constituents (Accounts) with Interest Tags aligned to this program&apos;s mission. All donors with the appropriate interest should be ranked equally.
+3) Review the volunteer interests of donors related to the program: {!$Input:volInterest}
+Based on this data, identify donors (Accounts) with Interest Tags aligned to volunteerism. Rank donors based on the number of tags they have, which correlates with their overall willingness to engage with your organization.
+
+After creating the three lists, identify any donors (Accounts) that are on all 3 lists and rank them the most highly, ordered by their Gift Transaction amount totals. After these, identify any donors that are on 2 of the 3 lists and rank them alphabetically. 
+
+Compile a single final ranking of the top 5 most likely donors, ordered by [donors on all 3 lists, ordered by descending Gift Transaction totals] then [donors on 2 lists, alphabetical]. For each donor, provide a brief summary of why they are ranked where they are. The output should be formatted like this:
+
+&quot;Top Historical Donors to this Program
+
+[donor ranked 1 on gift transaction measure] format as a hyperlink to the record. Only the donor name should appear as a clickable link. Do not show the raw URL. Make the user experience easy where they can drill right into that record from the agent window.
+[donor ranked 2 on gift transaction measure]
+[donor ranked 3 on gift transaction measure]
+
+Interested Donors
+
+[alphabetical list of first 3 donors appearing on ProgramInterest]
+
+Interested Volunteers
+
+[ranked list based on volunteer interest]
+
+Most Likely to Donate, overall
+
+[final ranking of top 5 donors]&quot;
+</content>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Draft</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_9</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSONs representing data about donors for this organization. Create an output summary ranking the 3 donors (Accounts) that are most likely to donate to fundraising campaign based on these weights:
+
+
+1) Review the donation history related to the program: {!$Input:giftInput}
+Based on this data, identify donors (Accounts) tied to GiftTransaction records based on a GiftTransactionDesignation tied to the given Program. Rank the donors based on the Amount of their GiftTransactions. This ranking should carry the most weight.
+2) Review the program interests of donors related to the program: {!$Input:programInterest}
+Based on this data, identify constituents (Accounts) with Interest Tags aligned to this program&apos;s mission. All donors with the appropriate interest should be ranked equally.
+3) Review the volunteer interests of donors related to the program: {!$Input:volInterest}
+Based on this data, identify donors (Accounts) with Interest Tags aligned to volunteerism. Rank donors based on the number of tags they have, which correlates with their overall willingness to engage with your organization.
+
+After creating the three lists, identify any donors (Accounts) that are on all 3 lists and rank them the most highly, ordered by their Gift Transaction amount totals. After these, identify any donors that are on 2 of the 3 lists and rank them alphabetically. 
+
+Compile a single final ranking of the top 5 most likely donors, ordered by [donors on all 3 lists, ordered by descending Gift Transaction totals] then [donors on 2 lists, alphabetical]. For each donor, provide a brief summary of why they are ranked where they are. The output should be the donor&apos;s name as a clickable link to their account record. Do not show the raw URL. Please display the results like this:
+
+&quot;Top Historical Donors to this Program
+
+[donor ranked 1 on gift transaction measure]
+[donor ranked 2 on gift transaction measure]
+[donor ranked 3 on gift transaction measure]
+
+Interested Donors
+
+[alphabetical list of first 3 donors appearing on ProgramInterest]
+
+Interested Volunteers
+
+[ranked list based on volunteer interest]
+
+Most Likely to Donate, overall
+
+[final ranking of top 5 donors]&quot;
+</content>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_14</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSONs representing data about donors for this organization. Create an output summary ranking the 3 donors (Accounts) that are most likely to donate to fundraising campaign based on these weights:
+
+
+1) Review the donation history related to the program: {!$Input:giftInput}
+Based on this data, identify donors (Accounts) tied to GiftTransaction records based on a GiftTransactionDesignation tied to the given Program. Rank the donors based on the Amount of their GiftTransactions. This ranking should carry the most weight.
+2) Review the program interests of donors related to the program: {!$Input:programInterest}
+Based on this data, identify constituents (Accounts) with Interest Tags aligned to this program&apos;s mission. All donors with the appropriate interest should be ranked equally.
+3) Review the volunteer interests of donors related to the program: {!$Input:volInterest}
+Based on this data, identify donors (Accounts) with Interest Tags aligned to volunteerism. Rank donors based on the number of tags they have, which correlates with their overall willingness to engage with your organization.
+
+After creating the three lists, identify any donors (Accounts) that are on all 3 lists and rank them the most highly, ordered by their Gift Transaction amount totals. After these, identify any donors that are on 2 of the 3 lists and rank them alphabetically. 
+
+Compile a single final ranking of the top 5 most likely donors, ordered by [donors on all 3 lists, ordered by descending Gift Transaction totals] then [donors on 2 lists, alphabetical]. For each donor, provide a brief summary of why they are ranked where they are. The output should be formatted like this:
+
+&quot;Top Historical Donors to this Program
+
+[donor ranked 1 on gift transaction measure, formatted as a hyperlink to the record. Only the donor name should appear as a clickable link. Do not show the raw URL. Make the user experience easy where they can drill right into that record from the agent window.] 
+[donor ranked 2 on gift transaction measure]
+[donor ranked 3 on gift transaction measure]
+
+Interested Donors
+
+[alphabetical list of first 3 donors appearing on ProgramInterest]
+
+Interested Volunteers
+
+[ranked list based on volunteer interest]
+
+Most Likely to Donate, overall
+
+[final ranking of top 5 donors]&quot;
+</content>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_10</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSONs representing data about donors for this organization. Create an output summary ranking the 3 donors (Accounts) that are most likely to donate to fundraising campaign based on these weights:
+
+
+1) Review the donation history related to the program: {!$Input:giftInput}
+Based on this data, identify donors (Accounts) tied to GiftTransaction records based on a GiftTransactionDesignation tied to the given Program. Rank the donors based on the Amount of their GiftTransactions. This ranking should carry the most weight.
+2) Review the program interests of donors related to the program: {!$Input:programInterest}
+Based on this data, identify constituents (Accounts) with Interest Tags aligned to this program&apos;s mission. All donors with the appropriate interest should be ranked equally.
+3) Review the volunteer interests of donors related to the program: {!$Input:volInterest}
+Based on this data, identify donors (Accounts) with Interest Tags aligned to volunteerism. Rank donors based on the number of tags they have, which correlates with their overall willingness to engage with your organization.
+
+After creating the three lists, identify any donors (Accounts) that are on all 3 lists and rank them the most highly, ordered by their Gift Transaction amount totals. After these, identify any donors that are on 2 of the 3 lists and rank them alphabetically. 
+
+Compile a single final ranking of the top 5 most likely donors, ordered by [donors on all 3 lists, ordered by descending Gift Transaction totals] then [donors on 2 lists, alphabetical]. For each donor, provide a brief summary of why they are ranked where they are. The output should be formatted to show only the donor&apos;s name as a clickable link. Do not show the raw URL. Please display the results like this:
+
+&quot;Top Historical Donors to this Program
+
+[donor ranked 1 on gift transaction measure}]
+[donor ranked 2 on gift transaction measure]
+[donor ranked 3 on gift transaction measure]
+
+Interested Donors
+
+[alphabetical list of first 3 donors appearing on ProgramInterest]
+
+Interested Volunteers
+
+[ranked list based on volunteer interest]
+
+Most Likely to Donate, overall
+
+[final ranking of top 5 donors]&quot;
+</content>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_12</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSONs representing data about donors for this organization. Create an output summary ranking the 3 donors (Accounts) that are most likely to donate to fundraising campaign based on these weights:
+
+
+1) Review the donation history related to the program: {!$Input:giftInput}
+Based on this data, identify donors (Accounts) tied to GiftTransaction records based on a GiftTransactionDesignation tied to the given Program. Rank the donors based on the Amount of their GiftTransactions. This ranking should carry the most weight.
+2) Review the program interests of donors related to the program: {!$Input:programInterest}
+Based on this data, identify constituents (Accounts) with Interest Tags aligned to this program&apos;s mission. All donors with the appropriate interest should be ranked equally.
+3) Review the volunteer interests of donors related to the program: {!$Input:volInterest}
+Based on this data, identify donors (Accounts) with Interest Tags aligned to volunteerism. Rank donors based on the number of tags they have, which correlates with their overall willingness to engage with your organization.
+
+After creating the three lists, identify any donors (Accounts) that are on all 3 lists and rank them the most highly, ordered by their Gift Transaction amount totals. After these, identify any donors that are on 2 of the 3 lists and rank them alphabetically. 
+
+Compile a single final ranking of the top 5 most likely donors, ordered by [donors on all 3 lists, ordered by descending Gift Transaction totals] then [donors on 2 lists, alphabetical]. For each donor, provide a brief summary of why they are ranked where they are. The output should be formatted to show only the donor&apos;s name as a clickable link back to the record. Do not show the raw URL. Please display the results like this:
+
+&quot;Top Historical Donors to this Program
+
+[donor ranked 1 on gift transaction measure]
+[donor ranked 2 on gift transaction measure]
+[donor ranked 3 on gift transaction measure]
+
+Interested Donors
+
+[alphabetical list of first 3 donors appearing on ProgramInterest]
+
+Interested Volunteers
+
+[ranked list based on volunteer interest]
+
+Most Likely to Donate, overall
+
+[final ranking of top 5 donors]&quot;
+</content>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_13</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSON inputs representing data about donors for this organization. Create an output summary ranking the top 3 donors (Accounts) most likely to donate to a fundraising campaign using the criteria below:
+1. Review the donation history related to the program
+Input: {!$Input:giftInput}
+Identify donors (Accounts) tied to GiftTransaction records that are linked to the program via a GiftTransactionDesignation.
+Rank these donors by the total Amount of their GiftTransactions related to this program.
+This measure carries the most weight in the overall ranking.
+2. Review the program interests of donors
+Input: {!$Input:programInterest}
+Identify donors (Accounts) who have Interest Tags aligned to the program’s mission.
+All donors with the appropriate interest should be considered equally ranked in this category.
+3. Review the volunteer interests of donors
+Input: {!$Input:volInterest}
+Identify donors (Accounts) with Interest Tags related to volunteerism.
+Rank these donors by the number of tags they have — more tags suggest higher engagement potential.
+
+🧮 Final Donor Ranking Logic
+Donors appearing on all three lists should be ranked highest, ordered by total Gift Transaction amounts.
+Donors appearing on two out of the three lists should be ranked next, sorted alphabetically.
+Compile a final ranking of the top 5 donors based on these rules.
+
+🔗 Output Instructions — Rich Text Format
+All output must be in rich text format, using HTML-style links.
+ When listing donors, display their name as a clickable link to their Salesforce Account record.
+
+Use this format:
+&lt;a href=&quot;https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view&quot;&gt;Donor Name&lt;/a&gt;
+Replace {AccountId} with the actual ID from the donor&apos;s record.
+Only show the donor name as a hyperlink — do not show or include the raw URL.
+Do not use markdown-style [Donor Name](URL) unless specifically required for a markdown environment.
+This format ensures compatibility with environments that support rich text rendering (e.g. Copilot, Slack, dashboards, or internal previews).
+
+📝 Final Output Structure
+Render your output using the following structure:
+eTop Historical Donors to this Program
+&lt;a href=&quot;https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view&quot;&gt;Donor Name 1&lt;/a&gt;
+&lt;a href=&quot;https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view&quot;&gt;Donor Name 2&lt;/a&gt;
+&lt;a href=&quot;https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view&quot;&gt;Donor Name 3&lt;/a&gt;
+Interested Donors
+&lt;a href=&quot;https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view&quot;&gt;Donor A&lt;/a&gt;
+&lt;a href=&quot;https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view&quot;&gt;Donor B&lt;/a&gt;
+&lt;a href=&quot;https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view&quot;&gt;Donor C&lt;/a&gt;
+Interested Volunteers
+&lt;a href=&quot;https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view&quot;&gt;Donor X&lt;/a&gt; — 5 tags
+&lt;a href=&quot;https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view&quot;&gt;Donor Y&lt;/a&gt; — 3 tags
+&lt;a href=&quot;https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view&quot;&gt;Donor Z&lt;/a&gt; — 2 tags
+Most Likely to Donate, Overall
+&lt;a href=&quot;https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view&quot;&gt;Donor Name 1&lt;/a&gt; — Appears on all 3 lists, highest giving history
+&lt;a href=&quot;https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view&quot;&gt;Donor Name 2&lt;/a&gt; — Appears on all 3 lists, second highest giving
+&lt;a href=&quot;https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view&quot;&gt;Donor Name 3&lt;/a&gt; — Appears on 2 lists, alphabetically ranked
+&lt;a href=&quot;https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view&quot;&gt;Donor Name 4&lt;/a&gt; — Appears on 2 lists, alphabetically ranked
+&lt;a href=&quot;https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view&quot;&gt;Donor Name 5&lt;/a&gt; — Appears on 2 lists, alphabetically ranked
+</content>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_15</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSON inputs representing data about donors for this organization. Create an output summary ranking the top 3 donors (Accounts) most likely to donate to a fundraising campaign using the criteria below:
+
+1. Review the donation history related to the program
+Input: {!$Input:giftInput}
+Identify donors (Accounts) tied to GiftTransaction records that are linked to the program via a GiftTransactionDesignation.
+Rank these donors by the total Amount of their GiftTransactions related to this program.
+This measure carries the most weight in the overall ranking.
+2. Review the program interests of donors
+Input: {!$Input:programInterest}
+Identify donors (Accounts) who have Interest Tags aligned to the program’s mission.
+All donors with the appropriate interest should be considered equally ranked in this category.
+3. Review the volunteer interests of donors
+Input: {!$Input:volInterest}
+Identify donors (Accounts) with Interest Tags related to volunteerism.
+Rank these donors by the number of tags they have — more tags suggest higher engagement potential.
+
+🧮 Final Donor Ranking Logic
+Donors appearing on all three lists should be ranked highest, ordered by total Gift Transaction amounts.
+Donors appearing on two out of the three lists should be ranked next, sorted alphabetically.
+Compile a final ranking of the top 5 donors based on these rules.
+
+🔗 Output Instructions — Markdown Format
+All output must use Markdown formatting for links.
+ When listing donors, display their name as a clickable link to their Salesforce Account record.
+Use this format:
+[Donor Name](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view)
+Replace {AccountId} with the actual Account ID from the donor record.
+Only the donor name should be visible — do not show or expose the full raw URL.
+Ensure the final output is rendered as rich text so the links are clickable and readable.
+?📝 Final Output Format
+Structure your response using the following sections:
+?Top Historical Donors to this Program
+Donor Name 1
+Donor Name 2
+Donor Name 3
+Interested Donors
+Donor A
+Donor B
+Donor C
+Interested Volunteers
+Donor X — 5 tags
+Donor Y — 3 tags
+Donor Z — 2 tags
+Most Likely to Donate, Overall
+Donor Name 1 — Appears on all 3 lists, highest giving history
+Donor Name 2 — Appears on all 3 lists, second highest giving
+Donor Name 3 — Appears on 2 lists, alphabetically ranked
+Donor Name 4 — Appears on 2 lists, alphabetically ranked
+Donor Name 5 — Appears on 2 lists, alphabetically ranked
+</content>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_16</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSON inputs representing data about donors for this organization. Create an output summary ranking the top 3 donors (Accounts) most likely to donate to a fundraising campaign using the criteria below:
+
+1. Review the donation history related to the program
+Input: {!$Input:giftInput}
+Identify donors (Accounts) tied to GiftTransaction records that are linked to the program via a GiftTransactionDesignation.
+Rank these donors by the total Amount of their GiftTransactions related to this program.
+This measure carries the most weight in the overall ranking.
+2. Review the program interests of donors
+Input: {!$Input:programInterest}
+Identify donors (Accounts) who have Interest Tags aligned to the program’s mission.
+All donors with the appropriate interest should be considered equally ranked in this category.
+3. Review the volunteer interests of donors
+Input: {!$Input:volInterest}
+Identify donors (Accounts) with Interest Tags related to volunteerism.
+Rank these donors by the number of tags they have — more tags suggest higher engagement potential.
+
+🧮 Final Donor Ranking Logic
+Donors appearing on all three lists should be ranked highest, ordered by total Gift Transaction amounts.
+Donors appearing on two out of the three lists should be ranked next, sorted alphabetically.
+Compile a final ranking of the top 5 donors based on these rules.
+
+🔗 Output Instructions — Markdown Format
+All output must use Markdown formatting for links.
+ When listing donors, display their name as a clickable link to their Salesforce Account record. The only text visible to the user should be the Donor Name, which should be a clickable hyperlink to the account record. 
+Replace {AccountId} with the actual Account ID from the donor record.
+Only the donor name should be visible — do not show or expose the full raw URL.
+Ensure the final output is rendered as rich text so the links are clickable and readable.
+
+Use this format:
+[Donor Name](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view)
+The output from this example would read as
+Donor Name
+but that should be a clickable link to the url in parenthesis. Do not show the raw URL text to the user.
+
+?📝 Final Output Format
+Structure your response using the following sections:
+?Top Historical Donors to this Program
+Donor Name 1
+Donor Name 2
+Donor Name 3
+Interested Donors
+Donor A
+Donor B
+Donor C
+Interested Volunteers
+Donor X — 5 tags
+Donor Y — 3 tags
+Donor Z — 2 tags
+Most Likely to Donate, Overall
+Donor Name 1 — Appears on all 3 lists, highest giving history
+Donor Name 2 — Appears on all 3 lists, second highest giving
+Donor Name 3 — Appears on 2 lists, alphabetically ranked
+Donor Name 4 — Appears on 2 lists, alphabetically ranked
+Donor Name 5 — Appears on 2 lists, alphabetically ranked
+</content>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_17</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSON inputs representing data about donors for this organization. Create an output summary ranking the top 3 donors (Accounts) most likely to donate to a fundraising campaign using the criteria below:
+
+1. Review the donation history related to the program
+Input: {!$Input:giftInput}
+Identify donors (Accounts) tied to GiftTransaction records that are linked to the program via a GiftTransactionDesignation.
+Rank these donors by the total Amount of their GiftTransactions related to this program.
+This measure carries the most weight in the overall ranking.
+2. Review the program interests of donors
+Input: {!$Input:programInterest}
+Identify donors (Accounts) who have Interest Tags aligned to the program’s mission.
+All donors with the appropriate interest should be considered equally ranked in this category.
+3. Review the volunteer interests of donors
+Input: {!$Input:volInterest}
+Identify donors (Accounts) with Interest Tags related to volunteerism.
+Rank these donors by the number of tags they have — more tags suggest higher engagement potential.
+
+🧮 Final Donor Ranking Logic
+Donors appearing on all three lists should be ranked highest, ordered by total Gift Transaction amounts.
+Donors appearing on two out of the three lists should be ranked next, sorted alphabetically.
+Compile a final ranking of the top 5 donors based on these rules.
+
+🔗 Output Instructions — Markdown Format
+Generate an output formatted as HTML rich text.
+Paragraph titles should be wrapped with &lt;b&gt; tags
+Contextual text should be wrapped in underline and italics tags/
+When referencing the name of the Account, it must link to the record URL using the format https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view
+
+ When listing donors, display their name as a clickable link to their Salesforce Account record. The only text visible to the user should be the Donor Name, which should be a clickable hyperlink to the account record. 
+Replace {AccountId} with the actual Account ID from the donor record.
+Only the donor name should be visible — do not show or expose the full raw URL.
+Ensure the final output is rendered as rich text so the links are clickable and readable.
+
+Use this format:
+[Donor Name](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view)
+The output from this example would read as
+Donor Name
+but that should be a clickable link to the url in parenthesis. Do not show the raw URL text to the user.
+
+?📝 Final Output Format
+Structure your response using the following sections:
+?Top Historical Donors to this Program
+Donor Name 1
+Donor Name 2
+Donor Name 3
+Interested Donors
+Donor A
+Donor B
+Donor C
+Interested Volunteers
+Donor X — 5 tags
+Donor Y — 3 tags
+Donor Z — 2 tags
+Most Likely to Donate, Overall
+Donor Name 1 — Appears on all 3 lists, highest giving history
+Donor Name 2 — Appears on all 3 lists, second highest giving
+Donor Name 3 — Appears on 2 lists, alphabetically ranked
+Donor Name 4 — Appears on 2 lists, alphabetically ranked
+Donor Name 5 — Appears on 2 lists, alphabetically ranked
+</content>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_18</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSON inputs representing data about donors for this organization. Create an output summary ranking the top 3 donors (Accounts) most likely to donate to a fundraising campaign using the criteria below:
+
+1. Review the donation history related to the program
+Input: {!$Input:giftInput}
+Identify donors (Accounts) tied to GiftTransaction records that are linked to the program via a GiftTransactionDesignation.
+Rank these donors by the total Amount of their GiftTransactions related to this program.
+This measure carries the most weight in the overall ranking.
+2. Review the program interests of donors
+Input: {!$Input:programInterest}
+Identify donors (Accounts) who have Interest Tags aligned to the program’s mission.
+All donors with the appropriate interest should be considered equally ranked in this category.
+3. Review the volunteer interests of donors
+Input: {!$Input:volInterest}
+Identify donors (Accounts) with Interest Tags related to volunteerism.
+Rank these donors by the number of tags they have — more tags suggest higher engagement potential.
+
+🧮 Final Donor Ranking Logic
+Donors appearing on all three lists should be ranked highest, ordered by total Gift Transaction amounts.
+Donors appearing on two out of the three lists should be ranked next, sorted alphabetically.
+Compile a final ranking of the top 5 donors based on these rules.
+
+🔗 Output Instructions — Markdown Format
+Generate an output formatted as HTML rich text.
+Paragraph titles should be wrapped with &lt;b&gt; tags
+Contextual text should be wrapped in underline and italics tags/
+When referencing the name of the Account, it must link to the record URL using the format https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view
+
+ When listing donors, display their name as a clickable link to their Salesforce Account record. 
+Replace {AccountId} with the actual Account ID from the donor record.
+Only the donor name should be visible — do not show or expose the full raw URL.
+Ensure the final output is rendered as rich text so the links are clickable and readable.
+
+Use this format:
+[Donor Name](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view)
+The output from this example would read as
+Donor Name
+but that should be a clickable link to the url in parenthesis. Do not show the raw URL text to the user.
+
+?📝 Final Output Format
+Structure your response using the following sections:
+?Top Historical Donors to this Program
+Donor Name 1
+Donor Name 2
+Donor Name 3
+Interested Donors
+Donor A
+Donor B
+Donor C
+Interested Volunteers
+Donor X — 5 tags
+Donor Y — 3 tags
+Donor Z — 2 tags
+Most Likely to Donate, Overall
+Donor Name 1 — Appears on all 3 lists, highest giving history
+Donor Name 2 — Appears on all 3 lists, second highest giving
+Donor Name 3 — Appears on 2 lists, alphabetically ranked
+Donor Name 4 — Appears on 2 lists, alphabetically ranked
+Donor Name 5 — Appears on 2 lists, alphabetically ranked
+</content>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_19</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSON inputs representing data about donors for this organization. Create an output summary ranking the top 3 donors (Accounts) most likely to donate to a fundraising campaign using the criteria below:
+
+1. Review the donation history related to the program
+Input: {!$Input:giftInput}
+Identify donors (Accounts) tied to GiftTransaction records that are linked to the program via a GiftTransactionDesignation.
+Rank these donors by the total Amount of their GiftTransactions related to this program.
+This measure carries the most weight in the overall ranking.
+2. Review the program interests of donors
+Input: {!$Input:programInterest}
+Identify donors (Accounts) who have Interest Tags aligned to the program’s mission.
+All donors with the appropriate interest should be considered equally ranked in this category.
+3. Review the volunteer interests of donors
+Input: {!$Input:volInterest}
+Identify donors (Accounts) with Interest Tags related to volunteerism.
+Rank these donors by the number of tags they have — more tags suggest higher engagement potential.
+
+🧮 Final Donor Ranking Logic
+Donors appearing on all three lists should be ranked highest, ordered by total Gift Transaction amounts.
+Donors appearing on two out of the three lists should be ranked next, sorted alphabetically.
+Compile a final ranking of the top 5 donors based on these rules.
+
+🔗 Output Instructions — Markdown Format
+Generate an output formatted as HTML rich text.
+Paragraph titles should be wrapped with &lt;b&gt; tags
+Contextual text should be wrapped in underline and italics tags/
+When referencing the name of the Account, it must link to the record URL using the format https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view
+
+ When listing donors, display their name as a clickable link to their Salesforce Account record. 
+Replace {AccountId} with the actual Account ID from the donor record.
+Only the donor name should be visible — do not show or expose the full raw URL.
+Ensure the final output is rendered as rich text so the links are clickable and readable.
+
+Use this format:
+[Donor Name](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view)
+The output from this example would read as
+Donor Name
+but that should be a clickable link to the url in parenthesis. Do not show the raw URL text to the user.
+
+&quot;Top Historical Donors to this Program
+
+[donor ranked 1 on gift transaction measure]
+[donor ranked 2 on gift transaction measure]
+[donor ranked 3 on gift transaction measure]
+
+Interested Donors
+
+[alphabetical list of first 3 donors appearing on ProgramInterest]
+
+Interested Volunteers
+
+[ranked list based on volunteer interest]
+
+Most Likely to Donate, overall
+
+[final ranking of top 5 donors]&quot;
+</content>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_20</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSON inputs representing data about donors for this organization. Create an output summary ranking the top 3 donors (Accounts) most likely to donate to a fundraising campaign using the criteria below:
+
+1. Review the donation history related to the program
+Input: {!$Input:giftInput}
+Identify donors (Accounts) tied to GiftTransaction records that are linked to the program via a GiftTransactionDesignation.
+Rank these donors by the total Amount of their GiftTransactions related to this program.
+This measure carries the most weight in the overall ranking.
+2. Review the program interests of donors
+Input: {!$Input:programInterest}
+Identify donors (Accounts) who have Interest Tags aligned to the program’s mission.
+All donors with the appropriate interest should be considered equally ranked in this category.
+3. Review the volunteer interests of donors
+Input: {!$Input:volInterest}
+Identify donors (Accounts) with Interest Tags related to volunteerism.
+Rank these donors by the number of tags they have — more tags suggest higher engagement potential.
+
+🧮 Final Donor Ranking Logic
+Donors appearing on all three lists should be ranked highest, ordered by total Gift Transaction amounts.
+Donors appearing on two out of the three lists should be ranked next, sorted alphabetically.
+Compile a final ranking of the top 5 donors based on these rules.
+
+🔗 Output Instructions — Markdown Format
+Generate an output formatted as HTML rich text.
+Paragraph titles should be wrapped with &lt;b&gt; tags
+Contextual text should be wrapped in underline and italics tags/
+When referencing the name of the Account, it must link to the record URL using the format https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view
+
+ When listing donors, display their name as a clickable link to their Salesforce Account record. 
+Replace {AccountId} with the actual Account ID from the donor record.
+Ensure the final output is rendered as rich text so the links are clickable and readable.
+
+Format all links:
+[Donor Name](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view)
+The output from this example would read as
+Donor Name
+but that should be a clickable link to the url in parenthesis. Do not show the raw URL text to the user.
+
+
+Output should be structured in this format, using Rich Text bulleted lists. Remove any additional markdown from the output; the first text visible to the user should be &quot;Top Historical Donors to this Program&quot; and not &quot;&apos;&apos;html&quot;. 
+
+***Good Output Format:
+Top Historical Donors to this Program
+
+[donor ranked 1 on gift transaction measure] - [Brief explanation of why this donor is ranked 1]
+[donor ranked 2 on gift transaction measure] - [Brief explanation of why this donor is ranked 2]
+[donor ranked 3 on gift transaction measure] - [Brief explanation of why this donor is ranked 3]
+
+Interested Donors
+
+[alphabetical list of first 3 donors appearing on ProgramInterest] - [Brief explanation of why each donor is ranked]
+
+Interested Volunteers
+
+[ranked list based on volunteer interest] - [Brief explanation of why each donor is ranked]
+
+Most Likely to Donate, overall
+
+[final ranking of top 5 donors] - [Brief explanation of why each donor is ranked]
+
+
+***Incorrect format, because of the opening and closing markup as well as missing any explanations:
+
+```html
+Top Historical Donors to this Program
+
+Krystal Mccall
+
+Omega Financial Services
+
+Omega, Inc.
+
+
+
+Interested Donors
+
+Alex Garcia
+
+Javier Zimmerman
+
+James Melendez
+
+
+
+Interested Volunteers
+
+Walter Craig - 3 tags
+
+Raymond Oneal - 2 tags
+
+James Melendez - 1 tag
+
+
+
+Most Likely to Donate, overall
+
+Krystal Mccall
+
+Omega Financial Services
+
+Omega, Inc.
+
+Alex Garcia
+
+James Melendez
+
+
+```
+</content>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_21</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSON inputs representing data about donors for this organization. Create an output summary ranking the top 3 donors (Accounts) most likely to donate to a fundraising campaign using the criteria below:
+
+1. Review the donation history related to the program
+Input: {!$Input:giftInput}
+Identify donors (Accounts) tied to GiftTransaction records that are linked to the program via a GiftTransactionDesignation.
+Rank these donors by the total Amount of their GiftTransactions related to this program.
+This measure carries the most weight in the overall ranking.
+2. Review the program interests of donors
+Input: {!$Input:programInterest}
+Identify donors (Accounts) who have Interest Tags aligned to the program’s mission.
+All donors with the appropriate interest should be considered equally ranked in this category.
+3. Review the volunteer interests of donors
+Input: {!$Input:volInterest}
+Identify donors (Accounts) with Interest Tags related to volunteerism.
+Rank these donors by the number of tags they have — more tags suggest higher engagement potential.
+
+🧮 Final Donor Ranking Logic
+Donors appearing on all three lists should be ranked highest, ordered by total Gift Transaction amounts.
+Donors appearing on two out of the three lists should be ranked next, sorted alphabetically.
+Compile a final ranking of the top 5 donors based on these rules.
+
+🔗 Output Instructions — Markdown Format
+Generate an output formatted as HTML rich text.
+Paragraph titles should be wrapped with &lt;b&gt; tags
+Contextual text should be wrapped in underline and italics tags/
+When referencing the name of the Account, it must link to the record URL using the format https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view
+Replace {AccountId} with the actual Account ID from the donor record.
+Ensure the final output is rendered as rich text so the links are clickable and readable. Do not display the brackets or URL, only show the Donor Name.
+
+Format all links:
+[Donor Name](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view)
+The output from this example would read as
+Donor Name
+but that should be a clickable link to the url in parenthesis. **Do not show the raw URL text to the user.**
+
+
+Output should be structured in this format, using Rich Text bulleted lists. Remove any additional markdown from the output; the first text visible to the user should be &quot;Top Historical Donors to this Program&quot; and not &quot;&apos;&apos;html&quot;. 
+
+***Good Output Format, with
+Top Historical Donors to this Program
+
+[Krystal Mccall](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZciGYAT/view) - This donor has the highest gift transaction amount of $19,975, indicating strong financial support for the program.
+
+[Omega Financial Services](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZcvyYAD/view) - With a total of $18,400 in contributions, this donor demonstrates significant engagement with the program.
+
+[Omega, Inc.](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZbKTYA1/view) - Contributing $8,950, this donor ranks third based on their substantial gift history.
+
+Interested Donors
+
+[Alex Garcia](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZbKXYA1/view) - This donor has expressed interest in the program and has a total of $11,460 in gifts.
+
+[Javier Zimmerman](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZcsOYAT/view) - While not a top contributor, this donor&apos;s interest in the program aligns with their previous support.
+
+[James Melendez](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctLYAT/view) - This donor has shown interest in the program, enhancing their potential for future contributions.
+
+Interested Volunteers
+
+[Walter Craig](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctfYAD/view) - With three volunteer interest tags, this donor demonstrates a strong commitment to the organization&apos;s mission.
+
+[Raymond Oneal](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctYYAT/view) - This donor has two volunteer tags, indicating an active interest in supporting the organization through volunteer efforts.
+
+[James Melendez](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctLYAT/view) - With one volunteer interest tag, this donor shows a willingness to engage in volunteer opportunities.
+
+Most Likely to Donate, overall
+
+[Krystal Mccall](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZciGYAT/view) - Ranked highest due to significant contributions and interest in the program.
+
+[Omega Financial Services](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZcvyYAD/view) - Strong financial support combined with program interest positions this donor well.
+
+[Omega, Inc.](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZbKTYA1/view) - A solid donor with a history of contributions and interest in the program.
+
+[Alex Garcia](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZbKXYA1/view) - This donor&apos;s previous gifts and interest in the program make them a viable candidate for future donations.
+
+[James Melendez](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctLYAT/view) - With a combination of interest in the program and previous contributions, this donor is positioned to support future initiatives.
+
+***Incorrect format, because of the opening and closing markup as well as missing any explanations:
+
+```html
+Top Historical Donors to this Program
+
+Krystal Mccall
+
+Omega Financial Services
+
+Omega, Inc.
+
+
+
+Interested Donors
+
+Alex Garcia
+
+Javier Zimmerman
+
+James Melendez
+
+
+
+Interested Volunteers
+
+Walter Craig - 3 tags
+
+Raymond Oneal - 2 tags
+
+James Melendez - 1 tag
+
+
+
+Most Likely to Donate, overall
+
+Krystal Mccall
+
+Omega Financial Services
+
+Omega, Inc.
+
+Alex Garcia
+
+James Melendez
+
+
+```
+
+***Incorrect output because raw URL is shown, rather than a clickable rich text hyperlink
+Top Historical Donors to this Program
+
+[Krystal Mccall](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZciGYAT/view) - This donor has the highest gift transaction amount of $19,975, indicating strong financial support for the program.
+
+[Omega Financial Services](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZcvyYAD/view) - With a total of $18,400 in contributions, this donor demonstrates significant engagement with the program.
+
+[Omega, Inc.](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZbKTYA1/view) - Contributing $8,950, this donor ranks third based on their substantial gift history.
+
+Interested Donors
+
+[Alex Garcia](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZbKXYA1/view) - This donor has expressed interest in the program and has a total of $11,460 in gifts.
+
+[Javier Zimmerman](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZcsOYAT/view) - While not a top contributor, this donor&apos;s interest in the program aligns with their previous support.
+
+[James Melendez](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctLYAT/view) - This donor has shown interest in the program, enhancing their potential for future contributions.
+
+Interested Volunteers
+
+[Walter Craig](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctfYAD/view) - With three volunteer interest tags, this donor demonstrates a strong commitment to the organization&apos;s mission.
+
+[Raymond Oneal](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctYYAT/view) - This donor has two volunteer tags, indicating an active interest in supporting the organization through volunteer efforts.
+
+[James Melendez](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctLYAT/view) - With one volunteer interest tag, this donor shows a willingness to engage in volunteer opportunities.
+
+Most Likely to Donate, overall
+
+[Krystal Mccall](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZciGYAT/view) - Ranked highest due to significant contributions and interest in the program.
+
+[Omega Financial Services](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZcvyYAD/view) - Strong financial support combined with program interest positions this donor well.
+
+[Omega, Inc.](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZbKTYA1/view) - A solid donor with a history of contributions and interest in the program.
+
+[Alex Garcia](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZbKXYA1/view) - This donor&apos;s previous gifts and interest in the program make them a viable candidate for future donations.
+
+[James Melendez](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctLYAT/view) - With a combination of interest in the program and previous contributions, this donor is positioned to support future initiatives.
+</content>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_22</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSON inputs representing data about donors for this organization. Create an output summary ranking the top 3 donors (Accounts) most likely to donate to a fundraising campaign using the criteria below:
+
+1. Review the donation history related to the program
+Input: {!$Input:giftInput}
+Identify donors (Accounts) tied to GiftTransaction records that are linked to the program via a GiftTransactionDesignation.
+Rank these donors by the total Amount of their GiftTransactions related to this program.
+This measure carries the most weight in the overall ranking.
+2. Review the program interests of donors
+Input: {!$Input:programInterest}
+Identify donors (Accounts) who have Interest Tags aligned to the program’s mission.
+All donors with the appropriate interest should be considered equally ranked in this category.
+3. Review the volunteer interests of donors
+Input: {!$Input:volInterest}
+Identify donors (Accounts) with Interest Tags related to volunteerism.
+Rank these donors by the number of tags they have — more tags suggest higher engagement potential.
+
+🧮 Final Donor Ranking Logic
+Donors appearing on all three lists should be ranked highest, ordered by total Gift Transaction amounts.
+Donors appearing on two out of the three lists should be ranked next, sorted alphabetically.
+Compile a final ranking of the top 5 donors based on these rules.
+
+🔗 Output Instructions — Markdown Format
+Generate an output formatted as HTML rich text.
+Paragraph titles should be wrapped with &lt;b&gt; tags
+Contextual text should be wrapped in underline and italics tags/
+When referencing the name of the Account, it must link to the record URL using the format https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view
+Replace {AccountId} with the actual Account ID from the donor record.
+Ensure the final output is rendered as rich text so the links are clickable and readable. Do not display the brackets or URL, only show the Donor Name.
+
+Format all links:
+[Donor Name](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view)
+The output from this example would read as
+Donor Name
+but that should be a clickable link to the url in parenthesis. **Do not show the raw URL text to the user.**
+
+
+Output should be structured in this format, using Rich Text bulleted lists. Remove any additional markdown from the output; the first text visible to the user should be &quot;Top Historical Donors to this Program&quot; and not &quot;&apos;&apos;html&quot;. 
+
+***Good Output Format because Krystal Mccall is a clickable hyperlink to the Account record, and the URL is not shown to the user
+Top Historical Donors to this Program
+
+Krystal Mccall - This donor has the highest gift transaction amount of $19,975, indicating strong financial support for the program.
+
+
+
+***Incorrect format, because of the opening and closing markup as well as missing any explanations:
+
+```html
+Top Historical Donors to this Program
+
+Krystal Mccall
+
+Omega Financial Services
+
+Omega, Inc.
+
+
+
+Interested Donors
+
+Alex Garcia
+
+Javier Zimmerman
+
+James Melendez
+
+
+
+Interested Volunteers
+
+Walter Craig - 3 tags
+
+Raymond Oneal - 2 tags
+
+James Melendez - 1 tag
+
+
+
+Most Likely to Donate, overall
+
+Krystal Mccall
+
+Omega Financial Services
+
+Omega, Inc.
+
+Alex Garcia
+
+James Melendez
+
+
+```
+
+***Incorrect output because raw URL is shown, rather than a clickable rich text hyperlink
+Top Historical Donors to this Program
+
+[Krystal Mccall](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZciGYAT/view) - This donor has the highest gift transaction amount of $19,975, indicating strong financial support for the program.
+
+[Omega Financial Services](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZcvyYAD/view) - With a total of $18,400 in contributions, this donor demonstrates significant engagement with the program.
+
+[Omega, Inc.](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZbKTYA1/view) - Contributing $8,950, this donor ranks third based on their substantial gift history.
+
+Interested Donors
+
+[Alex Garcia](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZbKXYA1/view) - This donor has expressed interest in the program and has a total of $11,460 in gifts.
+
+[Javier Zimmerman](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZcsOYAT/view) - While not a top contributor, this donor&apos;s interest in the program aligns with their previous support.
+
+[James Melendez](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctLYAT/view) - This donor has shown interest in the program, enhancing their potential for future contributions.
+
+Interested Volunteers
+
+[Walter Craig](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctfYAD/view) - With three volunteer interest tags, this donor demonstrates a strong commitment to the organization&apos;s mission.
+
+[Raymond Oneal](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctYYAT/view) - This donor has two volunteer tags, indicating an active interest in supporting the organization through volunteer efforts.
+
+[James Melendez](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctLYAT/view) - With one volunteer interest tag, this donor shows a willingness to engage in volunteer opportunities.
+
+Most Likely to Donate, overall
+
+[Krystal Mccall](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZciGYAT/view) - Ranked highest due to significant contributions and interest in the program.
+
+[Omega Financial Services](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZcvyYAD/view) - Strong financial support combined with program interest positions this donor well.
+
+[Omega, Inc.](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZbKTYA1/view) - A solid donor with a history of contributions and interest in the program.
+
+[Alex Garcia](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZbKXYA1/view) - This donor&apos;s previous gifts and interest in the program make them a viable candidate for future donations.
+
+[James Melendez](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctLYAT/view) - With a combination of interest in the program and previous contributions, this donor is positioned to support future initiatives.
+</content>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_23</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSON inputs representing data about donors for this organization. Create an output summary ranking the top 3 donors (Accounts) most likely to donate to a fundraising campaign using the criteria below:
+
+1. Review the donation history related to the program
+Input: {!$Input:giftInput}
+Identify donors (Accounts) tied to GiftTransaction records that are linked to the program via a GiftTransactionDesignation.
+Rank these donors by the total Amount of their GiftTransactions related to this program.
+This measure carries the most weight in the overall ranking.
+2. Review the program interests of donors
+Input: {!$Input:programInterest}
+Identify donors (Accounts) who have Interest Tags aligned to the program’s mission.
+All donors with the appropriate interest should be considered equally ranked in this category.
+3. Review the volunteer interests of donors
+Input: {!$Input:volInterest}
+Identify donors (Accounts) with Interest Tags related to volunteerism.
+Rank these donors by the number of tags they have — more tags suggest higher engagement potential.
+
+🧮 Final Donor Ranking Logic
+Donors appearing on all three lists should be ranked highest, ordered by total Gift Transaction amounts.
+Donors appearing on two out of the three lists should be ranked next, sorted alphabetically.
+Compile a final ranking of the top 5 donors based on these rules.
+
+🔗 Output Instructions — Markdown Format
+Generate an output formatted as HTML rich text.
+Paragraph titles should be wrapped with &lt;b&gt; tags
+Contextual text should be wrapped in underline and italics tags/
+When referencing the name of the Account, it must link to the record URL using the format https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view
+Replace {AccountId} with the actual Account ID from the donor record.
+Ensure the final output is rendered as rich text so the links are clickable and readable. Do not display the brackets or URL, only show the Donor Name.
+
+***Format all links:
+[Donor Name](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/{AccountId}/view)
+The output from this example would read as
+Donor Name
+but that should be a clickable hyperlink to the url in parenthesis. **Do not show the raw URL text to the user.**
+
+
+Output should be structured in this format, using Rich Text bulleted lists. Remove any additional markdown from the output; the first text visible to the user should be &quot;Top Historical Donors to this Program&quot; and not &quot;&apos;&apos;html&quot;. 
+
+***Good Output Format because Krystal Mccall (and all other Account names) is a clickable hyperlink to the Account record, and the URL is not shown to the user
+Top Historical Donors to this Program
+
+Krystal Mccall - This donor has the highest gift transaction amount of $19,975, indicating strong financial support for the program.
+
+Interested Donors
+
+Alex Garcia - This donor has expressed interest in the program and has a total of $11,460 in gifts.
+
+Interested Volunteers
+
+Walter Craig - With three volunteer interest tags, this donor demonstrates a strong commitment to the organization&apos;s mission.
+
+
+Most Likely to Donate, overall
+
+Krystal Mccall - Ranked highest due to significant contributions and interest in the program.
+
+Omega Financial Services - Strong financial support combined with program interest positions this donor well.
+
+Omega, Inc. - A solid donor with a history of contributions and interest in the program.
+
+Alex Garcia - This donor&apos;s previous gifts and interest in the program make them a viable candidate for future donations.
+
+James Melendez - With a combination of interest in the program and previous contributions, this donor is positioned to support future initiatives.
+
+***Incorrect format, because of the opening and closing markup as well as missing any explanations:
+
+```html
+Top Historical Donors to this Program
+
+Krystal Mccall
+
+Omega Financial Services
+
+Omega, Inc.
+
+
+
+Interested Donors
+
+Alex Garcia
+
+Javier Zimmerman
+
+James Melendez
+
+
+
+Interested Volunteers
+
+Walter Craig - 3 tags
+
+Raymond Oneal - 2 tags
+
+James Melendez - 1 tag
+
+
+
+Most Likely to Donate, overall
+
+Krystal Mccall
+
+Omega Financial Services
+
+Omega, Inc.
+
+Alex Garcia
+
+James Melendez
+
+
+```
+
+***Incorrect output because raw URL is shown, rather than a clickable rich text hyperlink
+Top Historical Donors to this Program
+
+[Krystal Mccall](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZciGYAT/view) - This donor has the highest gift transaction amount of $19,975, indicating strong financial support for the program.
+
+[Omega Financial Services](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZcvyYAD/view) - With a total of $18,400 in contributions, this donor demonstrates significant engagement with the program.
+
+[Omega, Inc.](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZbKTYA1/view) - Contributing $8,950, this donor ranks third based on their substantial gift history.
+
+Interested Donors
+
+[Alex Garcia](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZbKXYA1/view) - This donor has expressed interest in the program and has a total of $11,460 in gifts.
+
+[Javier Zimmerman](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZcsOYAT/view) - While not a top contributor, this donor&apos;s interest in the program aligns with their previous support.
+
+[James Melendez](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctLYAT/view) - This donor has shown interest in the program, enhancing their potential for future contributions.
+
+Interested Volunteers
+
+[Walter Craig](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctfYAD/view) - With three volunteer interest tags, this donor demonstrates a strong commitment to the organization&apos;s mission.
+
+[Raymond Oneal](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctYYAT/view) - This donor has two volunteer tags, indicating an active interest in supporting the organization through volunteer efforts.
+
+[James Melendez](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctLYAT/view) - With one volunteer interest tag, this donor shows a willingness to engage in volunteer opportunities.
+
+Most Likely to Donate, overall
+
+[Krystal Mccall](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZciGYAT/view) - Ranked highest due to significant contributions and interest in the program.
+
+[Omega Financial Services](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZcvyYAD/view) - Strong financial support combined with program interest positions this donor well.
+
+[Omega, Inc.](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZbKTYA1/view) - A solid donor with a history of contributions and interest in the program.
+
+[Alex Garcia](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZbKXYA1/view) - This donor&apos;s previous gifts and interest in the program make them a viable candidate for future donations.
+
+[James Melendez](https://storm-5dddd2ac10a5aa.lightning.force.com/lightning/r/Account/001KY00000DZctLYAT/view) - With a combination of interest in the program and previous contributions, this donor is positioned to support future initiatives.
+</content>
+        <inputs>
+            <apiName>programInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInterest</masterLabel>
+            <referenceName>Input:programInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>giftInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>giftInput</masterLabel>
+            <referenceName>Input:giftInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>volInterest</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volInterest</masterLabel>
+            <referenceName>Input:volInterest</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>i1kSS7kb16ML71O7WolSLAvbfNVbxXjiyGOuDj691Ag=_24</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

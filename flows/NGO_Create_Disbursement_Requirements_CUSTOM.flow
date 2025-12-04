@@ -1,0 +1,1102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <apiVersion>64.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Sets the field values for FundingAwardRequirementRecord and then adds it to the FundingAwardRequirementRecords record collection.</description>
+        <name>AddFundingAwardRequirementToCollection</name>
+        <label>Add Funding Award Requirement to Collection</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>FundingAwardRequirement.FundingAwardId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>FundingAwardRequirement.FundingDisbursementId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>IterateOverSelectedFundingDisbursements.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>FundingAwardRequirement.Name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>FundingAwardRequirementNameFormula</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>FundingAwardRequirement.DueDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>FundingRequirementDueDateTimeZoneAdjustmentFormula</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>FundingAwardRequirement.Type</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>IterateOverFundingAwardRequirements.TypePicklist</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>FundingAwardRequirement.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>IterateOverFundingAwardRequirements.StatusPicklist</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>FundingAwardRequirement.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>IterateOverFundingAwardRequirements.DescriptionLongTextArea</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>FundingRewardRequirementRecords</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>FundingAwardRequirement</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>IterateOverFundingAwardRequirements</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Adds the scheduled date of the current funding disbursement record in the IterateOverSelectedFundingDisbursements loop.</description>
+        <name>AddFundingDisbursementScheduledDateToCollection</name>
+        <label>Add Funding Disbursement Scheduled Date to Collection</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>TimeZoneOffsetDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>IterateOverSelectedFundingDisbursements.ScheduledDate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>DisbursementScheduledDateTimeZoneOffset</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>TimeZoneOffsetFormula</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>IterateOverFundingAwardRequirements</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Sets FundingAwardRequirementRecordsCount to the number of records in FundingAwardRequirements.</description>
+        <name>SetCollectionCount</name>
+        <label>Set Collection Count</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>FundingAwardRequirementRecordsCount</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>FundingRewardRequirementRecords</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>ScreenDisplayConfirmationCreateFundingAwardRequirement</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Sets the FundingRewardRequirementRecords collection to a blank value.</description>
+        <name>SetRecurringFundingAwardRequirements</name>
+        <label>Set Recurring Funding Award Requirements</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>FundingRewardRequirementRecords</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+        <connector>
+            <targetReference>IterateOverSelectedFundingDisbursements</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Sets the TimezoneOffsetDate to the value of FundingRequirementDueDateFormula.</description>
+        <name>SetTimeZoneOffsetForDueDate</name>
+        <label>Set Time Zone Offset on Due Date</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>TimeZoneOffsetDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>FundingRequirementDueDateFormula</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>AddFundingAwardRequirementToCollection</targetReference>
+        </connector>
+    </assignments>
+    <choices>
+        <description>Stores the choice label and value for the Day option for PeriodPicklist on the ScreenCollectFundingAwardRequirementDetails screen.</description>
+        <name>ChoicePeriodDay</name>
+        <choiceText>Day</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Day</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Stores the choice label and value for the Month option for PeriodPicklist on the ScreenCollectFundingAwardRequirementDetails screen.</description>
+        <name>ChoicePeriodMonth</name>
+        <choiceText>Month</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Month</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Stores the choice label and value for the Week option for PeriodPicklist on the ScreenCollectFundingAwardRequirementDetails screen.</description>
+        <name>ChoicePeriodWeek</name>
+        <choiceText>Week</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Week</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Stores the choice label and value for the Year option for PeriodPicklist on the ScreenCollectFundingAwardRequirementDetails screen.</description>
+        <name>ChoicePeriodYear</name>
+        <choiceText>Year</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Year</stringValue>
+        </value>
+    </choices>
+    <customProperties>
+        <name>ScreenProgressIndicator</name>
+        <value>
+            <stringValue>{&quot;location&quot;:&quot;top&quot;,&quot;type&quot;:&quot;path&quot;}</stringValue>
+        </value>
+    </customProperties>
+    <decisions>
+        <description>Determines whether the funding award is found by checking if the Funding Award in Get Funding Award variable contains a record.</description>
+        <name>HaveFundingAward</name>
+        <label>Have Funding Award?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>ScreenDisplayErrorNoFundingAward</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>HasFundingAward</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>GetFundingAward</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>GetFundingAwardRequirements</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <dynamicChoiceSets>
+        <description>Stores the picklist choice set used in the StatusPicklist screen component on the ScreenCollectFundingAwardRequirementDetails screen. The object is set to FundingAwardRequirement, the data type is set to Picklist, and the field is set to Status.</description>
+        <name>ChoiceFundingAwardRequirementStatusPicklist</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Status</picklistField>
+        <picklistObject>FundingAwardRequirement</picklistObject>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <description>Stores the picklist choice set used in the TypePicklist screen component on the ScreenCollectFundingAwardRequirementDetails screen. The object is set to FundingAwardRequirement, the data type is set to Picklist, and the field is set to Type.</description>
+        <name>ChoiceFundingAwardRequirementType</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Type</picklistField>
+        <picklistObject>FundingAwardRequirement</picklistObject>
+    </dynamicChoiceSets>
+    <environments>Default</environments>
+    <formulas>
+        <description>Generates a name for a funding award requirement using the name from the GetFundingAwardRequirement element and the year, month, and day from the NewRequirementDueDateAdjustedForTimezone variable.</description>
+        <name>FundingAwardRequirementNameFormula</name>
+        <dataType>String</dataType>
+        <expression>{!IterateOverSelectedFundingDisbursements.DisbursementName} &amp; &quot;: &quot; &amp; {!IterateOverFundingAwardRequirements.NameText}</expression>
+    </formulas>
+    <formulas>
+        <description>Calculates the date/time for the due date that isn&apos;t adjusted for the running user&apos;s time zone for the funding requirement created by the flow.</description>
+        <name>FundingRequirementDueDateFormula</name>
+        <dataType>DateTime</dataType>
+        <expression>IF(
+            {!IterateOverFundingAwardRequirements.PeriodPicklist} = {!ChoicePeriodDay} || {!IterateOverFundingAwardRequirements.PeriodPicklist} = {!ChoicePeriodWeek},
+            {!IterateOverSelectedFundingDisbursements.ScheduledDate} + IF({!IterateOverFundingAwardRequirements.PeriodPicklist} = {!ChoicePeriodWeek}, -7, -1) * {!IterateOverFundingAwardRequirements.NumberOfPeriodsNumber},
+            ADDMONTHS({!IterateOverSelectedFundingDisbursements.ScheduledDate}, IF({!IterateOverFundingAwardRequirements.PeriodPicklist} = {!ChoicePeriodYear}, -12, -1) * {!IterateOverFundingAwardRequirements.NumberOfPeriodsNumber})
+            )</expression>
+    </formulas>
+    <formulas>
+        <description>Calculates the date/time for the due date of the funding requirement created by the flow based on the running user&apos;s time zone.</description>
+        <name>FundingRequirementDueDateTimeZoneAdjustmentFormula</name>
+        <dataType>DateTime</dataType>
+        <expression>{!FundingRequirementDueDateFormula} + ({!DisbursementScheduledDateTimeZoneOffset} - {!TimeZoneOffsetFormula}) / 24</expression>
+    </formulas>
+    <formulas>
+        <description>Calculates the number of hours the running user&apos;s time zone is ahead or behind UTC on the TimeZoneOffsetDate.</description>
+        <name>TimeZoneOffsetFormula</name>
+        <dataType>Number</dataType>
+        <expression>(DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 00:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 01:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 02:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 03:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 04:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 05:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 06:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 07:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 08:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 09:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 10:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 11:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 12:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 13:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 14:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 15:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 16:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 17:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 18:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 19:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 20:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 21:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 22:00:00&quot;)) - {!TimeZoneOffsetDate}) +
+            (DATEVALUE(DATETIMEVALUE(TEXT({!TimeZoneOffsetDate}) + &quot; 23:00:00&quot;)) - {!TimeZoneOffsetDate})</expression>
+        <scale>0</scale>
+    </formulas>
+    <interviewLabel>Create Disbursement Requirements CUSTOM {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Create Disbursement Requirements CUSTOM</label>
+    <loops>
+        <description>Repeats actions for each funding award requirement record in FundingAwardRequirementScheduleRepeater.</description>
+        <name>IterateOverFundingAwardRequirements</name>
+        <label>Iterate Over Funding Award Requirements</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>FundingAwardRequirementScheduleRepeater.AllItems</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>SetTimeZoneOffsetForDueDate</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>IterateOverSelectedFundingDisbursements</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <description>Repeats actions for each funding disbursement record that&apos;s selected in the FundingDisbursementsDataTable.</description>
+        <name>IterateOverSelectedFundingDisbursements</name>
+        <label>Iterate Over Selected Funding Disbursements</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>FundingDisbursementsDataTable.selectedRowsRecordCollection</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>AddFundingDisbursementScheduledDateToCollection</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>ScreenPreviewFundingAwardRequirements</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordCreates>
+        <description>Creates funding award requirement records using the values in the FundingAwardRequirements record collection.</description>
+        <name>CreateFundingAwardRequirements</name>
+        <label>Create Funding Award Requirements</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>SetCollectionCount</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>RollBackRecordsCreateFundingAwardRequirementsError</targetReference>
+        </faultConnector>
+        <inputReference>FundingRewardRequirementRecords</inputReference>
+    </recordCreates>
+    <recordLookups>
+        <description>Gets the existing funding disbursement records that are related to the funding award by checking if the FundingAwardId matches the recordId. Stores the ID, Name, DisbursementName, ScheduledDate, Amount, and Status of the results in the Funding Disbursements from Get Existing Funding Disbursements collection variable.</description>
+        <name>GetExistingFundingDisbursements</name>
+        <label>Get Existing Funding Disbursements</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>ScreenCollectFundingAwardRequirementDetails</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>ScreenDisplayErrorGetRecords</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>FundingAwardId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>FundingDisbursement</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Name</queriedFields>
+        <queriedFields>DisbursementName</queriedFields>
+        <queriedFields>ScheduledDate</queriedFields>
+        <queriedFields>Amount</queriedFields>
+        <queriedFields>PaymentMethodType</queriedFields>
+        <queriedFields>Status</queriedFields>
+        <sortField>ScheduledDate</sortField>
+        <sortOrder>Asc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Gets the funding award record with an ID that matches the recordId passed into the flow. Stores the result in the recordID record variable.</description>
+        <name>GetFundingAward</name>
+        <label>Get Funding Award</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>HaveFundingAward</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>ScreenDisplayErrorGetRecords</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>FundingAward</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Name</queriedFields>
+        <queriedFields>Amount</queriedFields>
+        <queriedFields>StartDate</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Gets the funding award requirement records that are related to the funding award by checking for funding award requirements with a funding award that matches recordId. Stores the ID, Name, DueDate, FundingDisbursementId, Status, and Type of the results in Funding Award Requirements from Get Funding Award Requirements record collection.</description>
+        <name>GetFundingAwardRequirements</name>
+        <label>Get Funding Award Requirements</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>GetExistingFundingDisbursements</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>ScreenDisplayErrorGetRecords</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>FundingAwardId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>FundingAwardRequirement</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Name</queriedFields>
+        <queriedFields>FundingDisbursementId</queriedFields>
+        <queriedFields>DueDate</queriedFields>
+        <queriedFields>Type</queriedFields>
+        <queriedFields>Status</queriedFields>
+        <queriedFields>Description</queriedFields>
+        <sortField>DueDate</sortField>
+        <sortOrder>Asc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordRollbacks>
+        <description>Cancels all pending record creation for elements after CreateFundingAwardRequirements.</description>
+        <name>RollBackRecordsCreateFundingAwardRequirementsError</name>
+        <label>Roll Back Record Creation</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>ScreenDisplayErrorCreateFundingAwardRequirements</targetReference>
+        </connector>
+    </recordRollbacks>
+    <runInMode>DefaultMode</runInMode>
+    <screens>
+        <description>Allows the flow user to review current funding award requirements, select funding disbursements, and add details for new funding award requirements that are related to funding disbursements. Using a repeater element on this screen, users can add multiple funding award requirement schedules.</description>
+        <name>ScreenCollectFundingAwardRequirementDetails</name>
+        <label>Collect Funding Award Requirement Details</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>SetRecurringFundingAwardRequirements</targetReference>
+        </connector>
+        <fields>
+            <name>FundingRequirementsSectionHeading</name>
+            <fieldText>Funding Requirements</fieldText>
+            <fieldType>RegionContainer</fieldType>
+            <fields>
+                <name>FundingRequirementsSectionHeading_Column1</name>
+                <fieldType>Region</fieldType>
+                <fields>
+                    <name>ExistingFundingRequirementsDataTable</name>
+                    <dataTypeMappings>
+                        <typeName>T</typeName>
+                        <typeValue>FundingAwardRequirement</typeValue>
+                    </dataTypeMappings>
+                    <extensionName>industries_common:inlineEditTable</extensionName>
+                    <fieldType>ComponentInstance</fieldType>
+                    <inputParameters>
+                        <name>label</name>
+                        <value>
+                            <stringValue>Existing Funding Requirements Data Table</stringValue>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>rowSelectionMethod</name>
+                        <value>
+                            <stringValue>NO_SELECTION</stringValue>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>tableEditMode</name>
+                        <value>
+                            <stringValue>READ_ONLY</stringValue>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>recordCollection</name>
+                        <value>
+                            <elementReference>GetFundingAwardRequirements</elementReference>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>objectApiName</name>
+                        <value>
+                            <stringValue>FundingAwardRequirement</stringValue>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>columns</name>
+                        <value>
+                            <stringValue>[{&quot;apiName&quot;:&quot;Name&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:0,&quot;label&quot;:&quot;Name&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;FundingDisbursementId&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:1,&quot;label&quot;:&quot;Funding Disbursement ID&quot;,&quot;type&quot;:&quot;customRichText&quot;},{&quot;apiName&quot;:&quot;DueDate&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:2,&quot;label&quot;:&quot;Due Date&quot;,&quot;type&quot;:&quot;customDateTime&quot;},{&quot;apiName&quot;:&quot;Type&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:3,&quot;label&quot;:&quot;Type&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Status&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:4,&quot;label&quot;:&quot;Status&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Description&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:5,&quot;label&quot;:&quot;Description&quot;,&quot;type&quot;:&quot;customRichText&quot;}]</stringValue>
+                        </value>
+                    </inputParameters>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>true</isRequired>
+                    <storeOutputAutomatically>true</storeOutputAutomatically>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
+                </fields>
+                <inputParameters>
+                    <name>width</name>
+                    <value>
+                        <stringValue>12</stringValue>
+                    </value>
+                </inputParameters>
+                <isRequired>false</isRequired>
+            </fields>
+            <isRequired>false</isRequired>
+            <regionContainerType>SectionWithHeader</regionContainerType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>SelectFundingDisbursementsHeading</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: transparent; font-size: 20px;&quot;&gt;Select Disbursements&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: transparent; color: rgb(0, 0, 0); font-size: 12px;&quot;&gt;To create funding award requirements, select the disbursements.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>FundingDisbursementsDataTable</name>
+            <dataTypeMappings>
+                <typeName>T</typeName>
+                <typeValue>FundingDisbursement</typeValue>
+            </dataTypeMappings>
+            <extensionName>industries_common:inlineEditTable</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Funding Disbursements Data Table</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>rowSelectionMethod</name>
+                <value>
+                    <stringValue>MULTI_SELECT</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>tableEditMode</name>
+                <value>
+                    <stringValue>READ_ONLY</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>recordCollection</name>
+                <value>
+                    <elementReference>GetExistingFundingDisbursements</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>objectApiName</name>
+                <value>
+                    <stringValue>FundingDisbursement</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>minRowsSelected</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>columns</name>
+                <value>
+                    <stringValue>[{&quot;apiName&quot;:&quot;Id&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:0,&quot;label&quot;:&quot;Funding Disbursement ID&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;DisbursementName&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:1,&quot;label&quot;:&quot;Disbursement Name&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;ScheduledDate&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:2,&quot;label&quot;:&quot;Scheduled Date&quot;,&quot;type&quot;:&quot;customDateTime&quot;},{&quot;apiName&quot;:&quot;Amount&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:3,&quot;label&quot;:&quot;Amount&quot;,&quot;type&quot;:&quot;currency&quot;},{&quot;apiName&quot;:&quot;PaymentMethodType&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:4,&quot;label&quot;:&quot;Payment Method Type&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Status&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:5,&quot;label&quot;:&quot;Status&quot;,&quot;type&quot;:&quot;text&quot;}]</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>FundingAwardRequirementScheduleHeading</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;background-color: transparent; color: rgb(0, 0, 0); font-size: 20px;&quot;&gt;Requirement Schedule&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: transparent; color: rgb(0, 0, 0); font-size: 12px;&quot;&gt;To create another requirement for a selected funding disbursement, click &lt;/span&gt;&lt;strong style=&quot;background-color: transparent; color: rgb(0, 0, 0); font-size: 12px;&quot;&gt;Add&lt;/strong&gt;&lt;span style=&quot;background-color: transparent; color: rgb(0, 0, 0); font-size: 12px;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>FundingAwardRequirementScheduleRepeater</name>
+            <fieldType>Repeater</fieldType>
+            <fields>
+                <name>NameText</name>
+                <dataType>String</dataType>
+                <fieldText>Name</fieldText>
+                <fieldType>InputField</fieldType>
+                <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                <isRequired>true</isRequired>
+                <styleProperties>
+                    <verticalAlignment>
+                        <stringValue>top</stringValue>
+                    </verticalAlignment>
+                    <width>
+                        <stringValue>12</stringValue>
+                    </width>
+                </styleProperties>
+            </fields>
+            <fields>
+                <name>NumberOfPeriodsNumber</name>
+                <dataType>Number</dataType>
+                <defaultValue>
+                    <numberValue>1.0</numberValue>
+                </defaultValue>
+                <fieldText>Periods Before Scheduled Disbursement Date</fieldText>
+                <fieldType>InputField</fieldType>
+                <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                <isRequired>true</isRequired>
+                <scale>0</scale>
+                <styleProperties>
+                    <verticalAlignment>
+                        <stringValue>top</stringValue>
+                    </verticalAlignment>
+                    <width>
+                        <stringValue>6</stringValue>
+                    </width>
+                </styleProperties>
+            </fields>
+            <fields>
+                <name>PeriodPicklist</name>
+                <choiceReferences>ChoicePeriodDay</choiceReferences>
+                <choiceReferences>ChoicePeriodWeek</choiceReferences>
+                <choiceReferences>ChoicePeriodMonth</choiceReferences>
+                <choiceReferences>ChoicePeriodYear</choiceReferences>
+                <dataType>String</dataType>
+                <defaultSelectedChoiceReference>ChoicePeriodMonth</defaultSelectedChoiceReference>
+                <fieldText>Period</fieldText>
+                <fieldType>DropdownBox</fieldType>
+                <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                <isRequired>true</isRequired>
+                <styleProperties>
+                    <verticalAlignment>
+                        <stringValue>top</stringValue>
+                    </verticalAlignment>
+                    <width>
+                        <stringValue>6</stringValue>
+                    </width>
+                </styleProperties>
+            </fields>
+            <fields>
+                <name>TypePicklist</name>
+                <choiceReferences>ChoiceFundingAwardRequirementType</choiceReferences>
+                <dataType>String</dataType>
+                <fieldText>Type</fieldText>
+                <fieldType>DropdownBox</fieldType>
+                <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                <isRequired>false</isRequired>
+                <styleProperties>
+                    <verticalAlignment>
+                        <stringValue>top</stringValue>
+                    </verticalAlignment>
+                    <width>
+                        <stringValue>6</stringValue>
+                    </width>
+                </styleProperties>
+            </fields>
+            <fields>
+                <name>StatusPicklist</name>
+                <choiceReferences>ChoiceFundingAwardRequirementStatusPicklist</choiceReferences>
+                <dataType>String</dataType>
+                <fieldText>Status</fieldText>
+                <fieldType>DropdownBox</fieldType>
+                <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                <isRequired>false</isRequired>
+                <styleProperties>
+                    <verticalAlignment>
+                        <stringValue>top</stringValue>
+                    </verticalAlignment>
+                    <width>
+                        <stringValue>6</stringValue>
+                    </width>
+                </styleProperties>
+            </fields>
+            <fields>
+                <name>DescriptionLongTextArea</name>
+                <fieldText>Description</fieldText>
+                <fieldType>LargeTextArea</fieldType>
+                <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                <isRequired>false</isRequired>
+                <styleProperties>
+                    <verticalAlignment>
+                        <stringValue>top</stringValue>
+                    </verticalAlignment>
+                    <width>
+                        <stringValue>12</stringValue>
+                    </width>
+                </styleProperties>
+            </fields>
+            <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+        <stageReference>
+            <elementReference>PreviewRequirementsStage</elementReference>
+        </stageReference>
+    </screens>
+    <screens>
+        <description>Displays a confirmation to the flow user when the funding award requirements are created and shows the new records in a data table. Shows the Finish button in the footer. Hides the Previous and Pause buttons in the footer to avoid unintentionally creating or updating records.</description>
+        <name>ScreenDisplayConfirmationCreateFundingAwardRequirement</name>
+        <label>Display Confirmation</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>SuccessfullyCreatedNewRequirementsMessage</name>
+            <fieldText>&lt;p&gt;{!FundingAwardRequirementRecordsCount} funding award requirements were created. Review the new records in the table.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>CreatedFundingAwardRequirementsDataTable</name>
+            <dataTypeMappings>
+                <typeName>T</typeName>
+                <typeValue>FundingAwardRequirement</typeValue>
+            </dataTypeMappings>
+            <extensionName>industries_common:inlineEditTable</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Created Funding Award Requirements Data Table</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>rowSelectionMethod</name>
+                <value>
+                    <stringValue>NO_SELECTION</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>tableEditMode</name>
+                <value>
+                    <stringValue>READ_ONLY</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>recordCollection</name>
+                <value>
+                    <elementReference>FundingRewardRequirementRecords</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>objectApiName</name>
+                <value>
+                    <stringValue>FundingAwardRequirement</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>columns</name>
+                <value>
+                    <stringValue>[{&quot;apiName&quot;:&quot;Id&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:0,&quot;label&quot;:&quot;Funding Award Requirement ID&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;FundingAwardId&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:1,&quot;label&quot;:&quot;Funding Award ID&quot;,&quot;type&quot;:&quot;customRichText&quot;},{&quot;apiName&quot;:&quot;FundingDisbursementId&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:2,&quot;label&quot;:&quot;Funding Disbursement ID&quot;,&quot;type&quot;:&quot;customRichText&quot;},{&quot;apiName&quot;:&quot;DueDate&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:3,&quot;label&quot;:&quot;Due Date&quot;,&quot;type&quot;:&quot;customDateTime&quot;},{&quot;apiName&quot;:&quot;Type&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:4,&quot;label&quot;:&quot;Type&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Status&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:5,&quot;label&quot;:&quot;Status&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Description&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:6,&quot;label&quot;:&quot;Description&quot;,&quot;type&quot;:&quot;customRichText&quot;}]</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+        <stageReference>
+            <elementReference>CreateRequirementsStage</elementReference>
+        </stageReference>
+    </screens>
+    <screens>
+        <description>Displays an error to the flow user when there&apos;s an error creating funding award requirement records.</description>
+        <name>ScreenDisplayErrorCreateFundingAwardRequirements</name>
+        <label>Display Error</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>ErrorCreateFundingAwardRequirementsText</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 12px; background-color: transparent; color: rgb(0, 0, 0);&quot;&gt;Something went wrong and we couldn&apos;t create an account record. Click &lt;/span&gt;&lt;strong style=&quot;font-size: 12px; background-color: transparent; color: rgb(0, 0, 0);&quot;&gt;Previous&lt;/strong&gt;&lt;span style=&quot;font-size: 12px; background-color: transparent; color: rgb(0, 0, 0);&quot;&gt; to try again or contact your Salesforce admin for help.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px; background-color: transparent; color: rgb(0, 0, 0);&quot;&gt;{!$Flow.FaultMessage}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <nextOrFinishButtonLabel>Finish without creating requirements</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+        <stageReference>
+            <elementReference>CreateRequirementsStage</elementReference>
+        </stageReference>
+    </screens>
+    <screens>
+        <description>Displays an error to the flow user when there&apos;s an error getting the funding award or related funding award requirement.</description>
+        <name>ScreenDisplayErrorGetRecords</name>
+        <label>Display Error</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>ErrorGetRecordsDisplayText</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: transparent; font-size: 12px;&quot;&gt;Something went wrong and we couldn&apos;t get the funding award record or the related funding award requirement records.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: transparent; font-size: 12px;&quot;&gt;{!$Flow.FaultMessage}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+        <stageReference>
+            <elementReference>PreviewRequirementsStage</elementReference>
+        </stageReference>
+    </screens>
+    <screens>
+        <description>Displays an error to the flow user when a record wasn&apos;t found in the Funding Award in Get Funding Award variable or when the flow user doesn&apos;t have permission to read the funding award record.</description>
+        <name>ScreenDisplayErrorNoFundingAward</name>
+        <label>Display Error</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>ErrorNoFundingAwardDisplayText</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 12px; background-color: transparent; color: rgb(0, 0, 0);&quot;&gt;We couldn&apos;t find the funding award record.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+        <stageReference>
+            <elementReference>PreviewRequirementsStage</elementReference>
+        </stageReference>
+    </screens>
+    <screens>
+        <description>Allows the flow user to review the new funding award requirements before the records are created. The user can update values in the PreviewFundingAwardRequirementsDataTable, click Previous to go back and adjust the schedule, or click Create Requirements.</description>
+        <name>ScreenPreviewFundingAwardRequirements</name>
+        <label>Preview Funding Award Requirements</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>CreateFundingAwardRequirements</targetReference>
+        </connector>
+        <fields>
+            <name>PreviewFundingAwardRequirementsDisplayText</name>
+            <fieldText>&lt;p&gt;Preview funding award requirements before creating the records. You can update values in the table. To adjust the recurrence schedule, click &lt;strong&gt;Previous&lt;/strong&gt; and update the schedule. When the funding award requirements look right, click &lt;strong&gt;Create Requirements&lt;/strong&gt;.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>PreviewFundingAwardRequirementsDataTable</name>
+            <dataTypeMappings>
+                <typeName>T</typeName>
+                <typeValue>FundingAwardRequirement</typeValue>
+            </dataTypeMappings>
+            <extensionName>industries_common:inlineEditTable</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Preview Funding Award Requirements Data Table</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>rowSelectionMethod</name>
+                <value>
+                    <stringValue>NO_SELECTION</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>tableEditMode</name>
+                <value>
+                    <stringValue>EDITABLE</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>recordCollection</name>
+                <value>
+                    <elementReference>FundingRewardRequirementRecords</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>objectApiName</name>
+                <value>
+                    <stringValue>FundingAwardRequirement</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>columns</name>
+                <value>
+                    <stringValue>[{&quot;apiName&quot;:&quot;Name&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:0,&quot;label&quot;:&quot;Name&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;FundingAwardId&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:1,&quot;label&quot;:&quot;Funding Award ID&quot;,&quot;type&quot;:&quot;customRichText&quot;},{&quot;apiName&quot;:&quot;FundingDisbursementId&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:2,&quot;label&quot;:&quot;Funding Disbursement ID&quot;,&quot;type&quot;:&quot;customRichText&quot;},{&quot;apiName&quot;:&quot;DueDate&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:3,&quot;label&quot;:&quot;Due Date&quot;,&quot;type&quot;:&quot;customDateTime&quot;},{&quot;apiName&quot;:&quot;Type&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:4,&quot;label&quot;:&quot;Type&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Status&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:5,&quot;label&quot;:&quot;Status&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Description&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:6,&quot;label&quot;:&quot;Description&quot;,&quot;type&quot;:&quot;customRichText&quot;}]</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>FundingRewardRequirementRecords</assignToReference>
+                <name>recordCollection</name>
+            </outputParameters>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <nextOrFinishButtonLabel>Create Requirements</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+        <stageReference>
+            <elementReference>PreviewRequirementsStage</elementReference>
+        </stageReference>
+    </screens>
+    <sourceTemplate>grantmk__CreateDisbRequirements</sourceTemplate>
+    <stages>
+        <description>Inserts newRequirementRecords.</description>
+        <name>CreateRequirementsStage</name>
+        <isActive>true</isActive>
+        <label>Create Requirements</label>
+        <stageOrder>1</stageOrder>
+    </stages>
+    <stages>
+        <description>Preview newRequirementsRecords about to be created.</description>
+        <name>PreviewRequirementsStage</name>
+        <isActive>true</isActive>
+        <label>Preview Requirements</label>
+        <stageOrder>0</stageOrder>
+    </stages>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>GetFundingAward</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Stores the number of hours the running user&apos;s time zone is ahead or behind UTC on the disbursement scheduled date.</description>
+        <name>DisbursementScheduledDateTimeZoneOffset</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+    </variables>
+    <variables>
+        <description>Stores the funding award requirement record to be created.</description>
+        <name>FundingAwardRequirement</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>FundingAwardRequirement</objectType>
+    </variables>
+    <variables>
+        <description>Stores the count of records in FundingAwardRequirements.</description>
+        <name>FundingAwardRequirementRecordsCount</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
+    <variables>
+        <description>Stores the collection of funding award requirement records created by the flow.</description>
+        <name>FundingRewardRequirementRecords</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>FundingAwardRequirement</objectType>
+    </variables>
+    <variables>
+        <description>Stores the ID of the funding award passed into the flow.</description>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Stores a temporary date-only value of the record due date.</description>
+        <name>TimeZoneOffsetDate</name>
+        <dataType>Date</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

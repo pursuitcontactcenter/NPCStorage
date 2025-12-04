@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>5QQdLGKQMCL8V0WYgCLQe1znxkufYPnfpi2pbnAcSbU=_3</activeVersionIdentifier>
+    <description>Review gift transactions and interaction summaries from a donor/Account record</description>
+    <developerName>Fundraising_Agent_Summarize_Donor</developerName>
+    <masterLabel>Fundraising Agent: Summarize Donor</masterLabel>
+    <templateVersions>
+        <content>You are a donor management specialist at a nonprofit organization. Review information about a donor, including previous donations, campaign participation, and interaction notes in order to answer questions and provide summaries about the donor.
+
+Donor&apos;s biographical profile: {!$RecordSnapshot:donor.Snapshot}
+Donor&apos;s support history: {!$RelatedList:donor.Cases.Records}
+Donor&apos;s giving history: {!$RelatedList:donor.GiftTransactions.Records}
+
+Provide a high level summary of this donor, including length of their interaction history (based on the TransactionDate of the earliest GiftTransaction), trends or themes in their cases and gifts, and information about how best to manage this account to encourage future donations to your organization. Only include information about the First, Last, Total, and Average gifts based on GiftTransactions; do not provide details on specific gifts unless the user explicitly asks about donation or giving history.
+</content>
+        <inputs>
+            <apiName>donor</apiName>
+            <definition>SOBJECT://Account</definition>
+            <masterLabel>donor</masterLabel>
+            <referenceName>Input:donor</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>invocable://getRelatedList</definition>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>parentRecordId</parameterName>
+                <valueExpression>{!$Input:donor.Id}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>relatedListName</parameterName>
+                <valueExpression>Cases</valueExpression>
+            </parameters>
+            <referenceName>RelatedList:donor.Cases.Records</referenceName>
+        </templateDataProviders>
+        <templateDataProviders>
+            <definition>invocable://getRelatedList</definition>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>parentRecordId</parameterName>
+                <valueExpression>{!$Input:donor.Id}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>relatedListName</parameterName>
+                <valueExpression>GiftTransactions</valueExpression>
+            </parameters>
+            <referenceName>RelatedList:donor.GiftTransactions.Records</referenceName>
+        </templateDataProviders>
+        <templateDataProviders>
+            <definition>invocable://getDataForGrounding</definition>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>recordId</parameterName>
+                <valueExpression>{!$Input:donor.Id}</valueExpression>
+            </parameters>
+            <referenceName>RecordSnapshot:donor</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>5QQdLGKQMCL8V0WYgCLQe1znxkufYPnfpi2pbnAcSbU=_3</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a donor management specialist at a nonprofit organization. Review information about a donor, including previous donations, campaign participation, and interaction notes in order to answer questions and provide summaries about the donor.
+
+Highlight the most recent gifts, and any interactions about the Capital Gala 2023. 
+
+Donor&apos;s biographical profile: {!$RecordSnapshot:donor.Snapshot}
+Donor&apos;s giving history: {!$RelatedList:donor.GiftTransactions.Records}
+
+Donor&apos;s interaction notes: {!$RelatedList:donor.InteractionSummaries.Records} 
+Review the Notes and Next Steps from each Interaction Summary, and provide an overview. Based on the Notes, provide details about the interaction. Specifically provide any feedback from the donor.
+</content>
+        <inputs>
+            <apiName>donor</apiName>
+            <definition>SOBJECT://Account</definition>
+            <masterLabel>donor</masterLabel>
+            <referenceName>Input:donor</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>invocable://getRelatedList</definition>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>parentRecordId</parameterName>
+                <valueExpression>{!$Input:donor.Id}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>relatedListName</parameterName>
+                <valueExpression>GiftTransactions</valueExpression>
+            </parameters>
+            <referenceName>RelatedList:donor.GiftTransactions.Records</referenceName>
+        </templateDataProviders>
+        <templateDataProviders>
+            <definition>invocable://getRelatedList</definition>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>parentRecordId</parameterName>
+                <valueExpression>{!$Input:donor.Id}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>relatedListName</parameterName>
+                <valueExpression>InteractionSummaries</valueExpression>
+            </parameters>
+            <referenceName>RelatedList:donor.InteractionSummaries.Records</referenceName>
+        </templateDataProviders>
+        <templateDataProviders>
+            <definition>invocable://getDataForGrounding</definition>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>recordId</parameterName>
+                <valueExpression>{!$Input:donor.Id}</valueExpression>
+            </parameters>
+            <referenceName>RecordSnapshot:donor</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>5QQdLGKQMCL8V0WYgCLQe1znxkufYPnfpi2pbnAcSbU=_1</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a donor management specialist at a nonprofit organization. Review information about a donor, including previous donations, campaign participation, and interaction notes in order to answer questions and provide summaries about the donor.
+
+Donor&apos;s biographical profile: {!$RecordSnapshot:donor.Snapshot}
+Donor&apos;s giving history: {!$RelatedList:donor.GiftTransactions.Records}
+
+</content>
+        <inputs>
+            <apiName>donor</apiName>
+            <definition>SOBJECT://Account</definition>
+            <masterLabel>donor</masterLabel>
+            <referenceName>Input:donor</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>invocable://getRelatedList</definition>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>parentRecordId</parameterName>
+                <valueExpression>{!$Input:donor.Id}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>relatedListName</parameterName>
+                <valueExpression>GiftTransactions</valueExpression>
+            </parameters>
+            <referenceName>RelatedList:donor.GiftTransactions.Records</referenceName>
+        </templateDataProviders>
+        <templateDataProviders>
+            <definition>invocable://getDataForGrounding</definition>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>recordId</parameterName>
+                <valueExpression>{!$Input:donor.Id}</valueExpression>
+            </parameters>
+            <referenceName>RecordSnapshot:donor</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>5QQdLGKQMCL8V0WYgCLQe1znxkufYPnfpi2pbnAcSbU=_2</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

@@ -1,0 +1,1969 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>AddInfluence</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AddInfluence</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AddInfluence</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>SDO_Sales_Opportunity_Default</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>SDO_Sales_Opportunity_Default</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <businessProcesses>
+        <fullName>Channel Sales Process</fullName>
+        <description>Opportunities through channel partners.</description>
+        <isActive>true</isActive>
+        <values>
+            <fullName>Closed Lost</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed Won</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Discovery</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Negotiation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Proposal%2FQuote</fullName>
+            <default>false</default>
+        </values>
+    </businessProcesses>
+    <businessProcesses>
+        <fullName>Grants</fullName>
+        <isActive>true</isActive>
+        <values>
+            <fullName>Awarded</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Payment Received</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Proposal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Research</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Submitted</fullName>
+            <default>false</default>
+        </values>
+    </businessProcesses>
+    <businessProcesses>
+        <fullName>Grants Process</fullName>
+        <isActive>true</isActive>
+        <values>
+            <fullName>Awarded</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Develop Proposal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Final Approval</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOI Submitted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lost</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Research</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Submitted</fullName>
+            <default>false</default>
+        </values>
+    </businessProcesses>
+    <businessProcesses>
+        <fullName>Major Gifts</fullName>
+        <isActive>true</isActive>
+        <values>
+            <fullName>1 - Identification</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2 - Qualification</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3 - Cultivation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4 - Solicitation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5 - Pledged</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6 - Gift Agreement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7 - Closed Won</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>8 - Closed Lost</fullName>
+            <default>false</default>
+        </values>
+    </businessProcesses>
+    <businessProcesses>
+        <fullName>Simple Sales Process</fullName>
+        <isActive>true</isActive>
+        <values>
+            <fullName>Closed Lost</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed Won</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Discovery</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Negotiation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Proposal%2FQuote</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Qualification</fullName>
+            <default>false</default>
+        </values>
+    </businessProcesses>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Opportunity_Layout</fullName>
+        <fields>Name</fields>
+        <fields>AccountId</fields>
+        <fields>Amount</fields>
+        <fields>CloseDate</fields>
+        <fields>Probability</fields>
+        <fields>OwnerId</fields>
+        <label>Opportunity Layout</label>
+    </compactLayouts>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <externalSharingModel>Private</externalSharingModel>
+    <fields>
+        <fullName>AccountId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Amount</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>true</trackTrending>
+    </fields>
+    <fields>
+        <fullName>ApprovalStatus__c</fullName>
+        <label>Approval Status</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Pending</fullName>
+                    <default>false</default>
+                    <label>Pending</label>
+                </value>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+                <value>
+                    <fullName>Rejected</fullName>
+                    <default>false</default>
+                    <label>Rejected</label>
+                </value>
+                <value>
+                    <fullName>Recalled</fullName>
+                    <default>false</default>
+                    <label>Recalled</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>CampaignId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CloseDate</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>true</trackTrending>
+    </fields>
+    <fields>
+        <fullName>CloseDate_TODAY__c</fullName>
+        <externalId>false</externalId>
+        <formula>CloseDate - TODAY()</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Closing Countdown</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ContractId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CurrencyIsoCode</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>DB_Amount__c</fullName>
+        <label>DB Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>DB_Days__c</fullName>
+        <defaultValue>7</defaultValue>
+        <description>This is used for the &quot;Perfect Data&quot; SE tool</description>
+        <externalId>false</externalId>
+        <label>DB Days</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DateTimeCreated__c</fullName>
+        <label>Created Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Days_In_Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>Now() - LastStageChangeDate</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Days In Status</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Description</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>ED_Close_Date_Delta__c</fullName>
+        <externalId>false</externalId>
+        <formula>ED_Predicted_Close_Date__c - CloseDate</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>What: This is the number of days before or after the close date the opportunity is predicted to close.  It is calculated by subtracting the Close Date from the Predicted Close Date. This is from the SDO. DO NOT REMOVE.</inlineHelpText>
+        <label>ED Close Date Delta</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ED_Leading_Causes__c</fullName>
+        <description>What: Einstein Discovery Field. This is from the SDO. DO NOT REMOVE.</description>
+        <label>ED Leading Causes</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ED_Outcome__c</fullName>
+        <description>What: This is for Einstein Discovery. This is from the SDO. DO NOT REMOVE.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is the number of DAYS after the Created Date that this opportunity is targeted to close.</inlineHelpText>
+        <label>ED Predicted Time to Close</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ED_Predicted_Close_Date__c</fullName>
+        <description>What: This is for Einstein Discovery. This is from the SDO. DO NOT REMOVE.</description>
+        <formula>DateTimeCreated__c + ED_Outcome__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>This is calculated by adding the number of days in the &quot;ED Predicted Time to Close&quot; field to the CREATED DATE.</inlineHelpText>
+        <label>ED Predicted Close Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ED_Prescription__c</fullName>
+        <description>What: This is for Einstein Discovery. This is from the SDO. DO NOT REMOVE.</description>
+        <label>ED Prescription</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Exec_Meeting__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>What: Used in Analytics Demo Data Tool. Who: Rodrigo Mercader</description>
+        <inlineHelpText>Check this box to change the results of Einstein Opportunity DIscovery.</inlineHelpText>
+        <label>Executive Meeting</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ExpectedRevenue</fullName>
+        <securityClassification>Confidential</securityClassification>
+    </fields>
+    <fields>
+        <fullName>External_ID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>External ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Interactive_Demo__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>What: Used in Analytics Demo Data Tool. Who: Rodrigo Mercader</description>
+        <inlineHelpText>Check this box to change the results of Einstein Opportunity Discovery</inlineHelpText>
+        <label>Interactive Demo</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IqScore</fullName>
+    </fields>
+    <fields>
+        <fullName>IsExcludedFromTerritory2Filter</fullName>
+    </fields>
+    <fields>
+        <fullName>IsPrivate</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>LastActivityDate__c</fullName>
+        <description>What: Used in Analytics Demo Data Tool. Who: Rodrigo Mercader</description>
+        <label>Last Activity</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>LastModifiedDate__c</fullName>
+        <description>What: Used by the Analytics Demo Data Tool. Do Not Remove.</description>
+        <label>Last Modified Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>LeadSource</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Name</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>NextStep</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>true</trackTrending>
+    </fields>
+    <fields>
+        <fullName>OwnerId</fullName>
+        <securityClassification>Confidential</securityClassification>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>PartnerAccountId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Pricebook2Id</fullName>
+        <securityClassification>Confidential</securityClassification>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Probability</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>true</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Products__c</fullName>
+        <label>Product</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>GC1000 series</fullName>
+                    <default>false</default>
+                    <label>GC1000 series</label>
+                </value>
+                <value>
+                    <fullName>GC5000 series</fullName>
+                    <default>false</default>
+                    <label>GC5000 series</label>
+                </value>
+                <value>
+                    <fullName>GC10001</fullName>
+                    <default>false</default>
+                    <label>GC10001</label>
+                </value>
+                <value>
+                    <fullName>GC20002</fullName>
+                    <default>false</default>
+                    <label>GC20002</label>
+                </value>
+                <value>
+                    <fullName>GC50000</fullName>
+                    <default>false</default>
+                    <label>GC50000</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>SDO_MAPS_Dataset_Split__c</fullName>
+        <description>SDO Maps Opportunity number field to split maps-related datasets equally and easily 02-02-23</description>
+        <externalId>false</externalId>
+        <label>Opportunity Dataset Split</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SDO_MAPS_Tag_Opportunity__c</fullName>
+        <description>SPM MAPS Opportunity dataset tag to help manage datasets in Maps and Territory Planning. 02-03-23 AB
+Help Text</description>
+        <externalId>false</externalId>
+        <label>Tag Opportunity</label>
+        <length>40</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SDO_Pardot_Is_B2BMA_Plus_Data__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>What: This data was added to support the B2BMA Plus (Pardot) Demo. This is here so we know what came from that import incase we want to remove the data. Who: Jesse Chase. When: 07/14/2021</description>
+        <label>Is B2BMA Plus Data</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SDO_Quip_Close_Plan_Quip__c</fullName>
+        <description>What: Used by the Quip lightning component to embed a Close Plan on the Opportunity record.  Added May 2021</description>
+        <label>Close_Plan_Quip</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>SDO_SFS_Work_Order__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>What: This field is needed to allow FSL Mobile users to create new opportunities</description>
+        <label>Work Order</label>
+        <referenceTo>WorkOrder</referenceTo>
+        <relationshipLabel>Opportunities</relationshipLabel>
+        <relationshipName>Opportunities</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SDO_Sales_Competitor__c</fullName>
+        <description>What: Used in Analytics Demo Data Tool. Who: Rodrigo Mercader
+Used in Sales Paths on Opportunity</description>
+        <label>Competitor</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Competitor A</fullName>
+                    <default>false</default>
+                    <label>Competitor A</label>
+                </value>
+                <value>
+                    <fullName>Competitor B</fullName>
+                    <default>false</default>
+                    <label>Competitor B</label>
+                </value>
+                <value>
+                    <fullName>Competitor C</fullName>
+                    <default>false</default>
+                    <label>Competitor C</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>SDO_Sales_Complete_ROI_Analysis__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>What: Used for Sales Path</description>
+        <label>Complete ROI Analysis</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SDO_Sales_Contract_Terms__c</fullName>
+        <description>What: Used for Sales Path</description>
+        <label>Contract Terms</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Standard</fullName>
+                    <default>false</default>
+                    <label>Standard</label>
+                </value>
+                <value>
+                    <fullName>Non-Standard</fullName>
+                    <default>false</default>
+                    <label>Non-Standard</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>SDO_Sales_Discount__c</fullName>
+        <description>What: used in approval process</description>
+        <label>Discount %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>SDO_Sales_Partner_Owner__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>What: Used for the &quot;Partner Opportunities&quot; related list on Partner Account records.</description>
+        <label>Partner Owner</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Partner Opportunities</relationshipLabel>
+        <relationshipName>PartnerOpportunities</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SDO_Sales_Primary_Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>What: Set the Primary contact relationship</description>
+        <label>Primary Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Opportunities (Primary Contact)</relationshipLabel>
+        <relationshipName>Opportunities1</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SDO_Sales_Project_Budgeted__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>What: Used for deal registration.</description>
+        <label>Project Budgeted?</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SDO_Sales_Project_Manager_Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>What: Used for Sales Path</description>
+        <label>Project Manager Contact</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Opportunities</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SDO_Sales_Reason_Lost__c</fullName>
+        <description>What: Reason lost field</description>
+        <label>Reason Lost</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Price</fullName>
+                    <default>false</default>
+                    <label>Price</label>
+                </value>
+                <value>
+                    <fullName>Product Issues</fullName>
+                    <default>false</default>
+                    <label>Product Issues</label>
+                </value>
+                <value>
+                    <fullName>Relationship</fullName>
+                    <default>false</default>
+                    <label>Relationship</label>
+                </value>
+                <value>
+                    <fullName>No Decision</fullName>
+                    <default>false</default>
+                    <label>No Decision</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>SDO_Sales_Stalled_Opportunity__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>What: Checkbox for stuck oppty. Used in reporting</description>
+        <label>Stalled Opportunity</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SDO_Sales_Status_Value__c</fullName>
+        <description>What: Status good or bad. Used in Formula fields</description>
+        <externalId>false</externalId>
+        <formula>IF( CloseDate_TODAY__c &gt;0, &quot;good&quot;, &quot;bad&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Status Value</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SDO_Sales_Winning_Competitor__c</fullName>
+        <description>What: used in reporting to detail the winning competitor</description>
+        <label>Winning Competitor</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Competitor A</fullName>
+                    <default>false</default>
+                    <label>Competitor A</label>
+                </value>
+                <value>
+                    <fullName>Competitor B</fullName>
+                    <default>false</default>
+                    <label>Competitor B</label>
+                </value>
+                <value>
+                    <fullName>Competitor C</fullName>
+                    <default>false</default>
+                    <label>Competitor C</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>SDO_Service_Case__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>What: Lookup field to the Case Object.</description>
+        <label>Case</label>
+        <referenceTo>Case</referenceTo>
+        <relationshipLabel>Related Opportunities</relationshipLabel>
+        <relationshipName>Opportunities</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Soft_Credit_Recipient__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Soft Credit Recipient</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Opportunities</relationshipLabel>
+        <relationshipName>Opportunities</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SourceId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>StageName</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>true</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>SyncedQuoteId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Territory2Id</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>TotalOpportunityQuantity</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>Type</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>analyticsdemo_batch_id__c</fullName>
+        <description>What: Used by the Analytics Demo Data Tool. Do Not Remove.</description>
+        <externalId>false</externalId>
+        <label>analyticsdemo_batch_id__c</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>db_days_CloseDate__c</fullName>
+        <description>This is for the Perfect Date Wizard Tool (v2)</description>
+        <externalId>false</externalId>
+        <label>CloseDate db days</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>ChannelPartner</fullName>
+        <active>true</active>
+        <businessProcess>Channel Sales Process</businessProcess>
+        <compactLayoutAssignment>Opportunity_Layout</compactLayoutAssignment>
+        <description>Opportunities created by or for partners.</description>
+        <label>Channel (Partner)</label>
+        <picklistValues>
+            <picklist>ApprovalStatus__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recalled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ForecastCategoryName</picklist>
+            <values>
+                <fullName>Best Case</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Commit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Omitted</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pipeline</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LeadSource</picklist>
+            <values>
+                <fullName>Cold Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Community</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Data%2Ecom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inbound Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Marketing Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Salesforce IoT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Website</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Products__c</picklist>
+            <values>
+                <fullName>GC1000 series</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GC10001</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GC20002</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GC5000 series</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GC50000</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SDO_Sales_Competitor__c</picklist>
+            <values>
+                <fullName>Competitor A</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor B</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor C</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SDO_Sales_Contract_Terms__c</picklist>
+            <values>
+                <fullName>Non-Standard</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Standard</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SDO_Sales_Reason_Lost__c</picklist>
+            <values>
+                <fullName>No Decision</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Price</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product Issues</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Relationship</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SDO_Sales_Winning_Competitor__c</picklist>
+            <values>
+                <fullName>Competitor A</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor B</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor C</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>New Business</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>NGO_Fundraising_Corporate_Gift</fullName>
+        <active>true</active>
+        <businessProcess>Major Gifts</businessProcess>
+        <label>Corporate Gift</label>
+        <picklistValues>
+            <picklist>ApprovalStatus__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recalled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ForecastCategoryName</picklist>
+            <values>
+                <fullName>Best Case</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Commit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Omitted</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pipeline</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LeadSource</picklist>
+            <values>
+                <fullName>Cold Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Community</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Data%2Ecom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inbound Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Marketing Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Salesforce IoT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Website</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Products__c</picklist>
+            <values>
+                <fullName>GC1000 series</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GC10001</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GC20002</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GC5000 series</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GC50000</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SDO_Sales_Competitor__c</picklist>
+            <values>
+                <fullName>Competitor A</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor B</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor C</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SDO_Sales_Contract_Terms__c</picklist>
+            <values>
+                <fullName>Non-Standard</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Standard</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SDO_Sales_Reason_Lost__c</picklist>
+            <values>
+                <fullName>No Decision</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Price</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product Issues</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Relationship</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SDO_Sales_Winning_Competitor__c</picklist>
+            <values>
+                <fullName>Competitor A</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor B</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor C</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Existing Business</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Business</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>NGO_Fundraising_Grant</fullName>
+        <active>true</active>
+        <businessProcess>Grants</businessProcess>
+        <label>Grant</label>
+        <picklistValues>
+            <picklist>ApprovalStatus__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recalled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ForecastCategoryName</picklist>
+            <values>
+                <fullName>Best Case</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Commit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Omitted</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pipeline</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LeadSource</picklist>
+            <values>
+                <fullName>Cold Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Community</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Data%2Ecom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inbound Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Marketing Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Salesforce IoT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Website</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Products__c</picklist>
+            <values>
+                <fullName>GC1000 series</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GC10001</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GC20002</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GC5000 series</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GC50000</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SDO_Sales_Competitor__c</picklist>
+            <values>
+                <fullName>Competitor A</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor B</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor C</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SDO_Sales_Contract_Terms__c</picklist>
+            <values>
+                <fullName>Non-Standard</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Standard</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SDO_Sales_Reason_Lost__c</picklist>
+            <values>
+                <fullName>No Decision</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Price</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product Issues</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Relationship</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SDO_Sales_Winning_Competitor__c</picklist>
+            <values>
+                <fullName>Competitor A</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor B</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor C</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Existing Business</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Business</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>NGO_Fundraising_Major_Gift</fullName>
+        <active>true</active>
+        <businessProcess>Major Gifts</businessProcess>
+        <label>Major Gift</label>
+        <picklistValues>
+            <picklist>ApprovalStatus__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recalled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ForecastCategoryName</picklist>
+            <values>
+                <fullName>Best Case</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Commit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Omitted</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pipeline</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LeadSource</picklist>
+            <values>
+                <fullName>Cold Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Community</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Data%2Ecom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inbound Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Marketing Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Salesforce IoT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Website</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Products__c</picklist>
+            <values>
+                <fullName>GC1000 series</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GC10001</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GC20002</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GC5000 series</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GC50000</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SDO_Sales_Competitor__c</picklist>
+            <values>
+                <fullName>Competitor A</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor B</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor C</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SDO_Sales_Contract_Terms__c</picklist>
+            <values>
+                <fullName>Non-Standard</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Standard</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SDO_Sales_Reason_Lost__c</picklist>
+            <values>
+                <fullName>No Decision</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Price</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product Issues</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Relationship</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SDO_Sales_Winning_Competitor__c</picklist>
+            <values>
+                <fullName>Competitor A</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor B</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor C</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Existing Business</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Business</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>SimpleOpportunity</fullName>
+        <active>true</active>
+        <businessProcess>Simple Sales Process</businessProcess>
+        <compactLayoutAssignment>Opportunity_Layout</compactLayoutAssignment>
+        <description>Simple Opportunities with products.</description>
+        <label>Simple Opportunity</label>
+        <picklistValues>
+            <picklist>ApprovalStatus__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recalled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ForecastCategoryName</picklist>
+            <values>
+                <fullName>Best Case</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Commit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Omitted</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pipeline</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LeadSource</picklist>
+            <values>
+                <fullName>Cold Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Community</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Data%2Ecom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inbound Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Marketing Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Salesforce IoT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Website</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Products__c</picklist>
+            <values>
+                <fullName>GC1000 series</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GC10001</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GC20002</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GC5000 series</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GC50000</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SDO_Sales_Competitor__c</picklist>
+            <values>
+                <fullName>Competitor A</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor B</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor C</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SDO_Sales_Contract_Terms__c</picklist>
+            <values>
+                <fullName>Non-Standard</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Standard</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SDO_Sales_Reason_Lost__c</picklist>
+            <values>
+                <fullName>No Decision</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Price</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product Issues</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Relationship</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SDO_Sales_Winning_Competitor__c</picklist>
+            <values>
+                <fullName>Competitor A</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor B</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor C</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>New Business</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>OPPORTUNITY.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ACCOUNT.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>OPPORTUNITY.CLOSE_DATE</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>OPPORTUNITY.NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>ACCOUNT.NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>ACCOUNT.SITE</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>OPPORTUNITY.NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ACCOUNT.NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ACCOUNT.SITE</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>OPPORTUNITY.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ACCOUNT.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ACCOUNT.SITE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>OPPORTUNITY.STAGE_NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>OPPORTUNITY.CLOSE_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>OPPORTUNITY_SCORE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Private</sharingModel>
+    <webLinks>
+        <fullName>Mass_Delete_Records</fullName>
+        <availability>online</availability>
+        <description>Mass delete records</description>
+        <displayType>massActionButton</displayType>
+        <linkType>page</linkType>
+        <masterLabel>Mass Delete</masterLabel>
+        <openType>replace</openType>
+        <page>Mass_Delete_Opportunity</page>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+    </webLinks>
+</CustomObject>

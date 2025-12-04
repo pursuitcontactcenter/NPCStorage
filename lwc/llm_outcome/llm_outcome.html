@@ -1,0 +1,34 @@
+<template>
+    <template if:true={showDetails}>
+        <lightning-card title="AI Generated Outcome">
+            <div class="slds-p-around_medium">
+                <div class="status-container">
+                    <div class="status-badge" style={divStyle}>
+                        {decision}
+                    </div>
+                </div>
+                <p class="slds-m-top_medium justification">{justification}</p>
+            </div>
+        </lightning-card>
+    </template>
+
+    <template if:false={showDetails}>
+        <lightning-card title="Waiting for Document">
+            <div class="slds-p-around_medium">
+                <p>⏳ The scholarship document is being processed...</p>
+            </div>
+        </lightning-card>
+    </template>
+    <template if:true={showManualDetails}>
+        <lightning-card title="Manual Review Outcome">
+            <div class="slds-p-around_medium">
+                <div class="status-container">
+                    <div class="status-badge" style={manualdivStyle}>
+                        {manual_decision}
+                    </div>
+                </div>
+                <p class="slds-m-top_medium justification">{manual_justification}</p>
+            </div>
+        </lightning-card>
+    </template>
+</template>

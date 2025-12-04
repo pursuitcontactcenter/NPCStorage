@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>s6M2uffSkJDJ5miyQiGRB+9EILpHI3h6gnRVP+9nhl0=_1</activeVersionIdentifier>
+    <description>This prompt summarizes the funding opportunity.</description>
+    <developerName>NGOTV_Grantmaking_Summarize_Funding_Opportunity</developerName>
+    <masterLabel>Grantmaking - Summarize Funding Opportunity</masterLabel>
+    <relatedEntity>FundingOpportunity</relatedEntity>
+    <templateVersions>
+        <content>&quot;Act as an experienced program director. Your task is to provide a comprehensive, yet concise, summary of a funding opportunity of this foundation.
+
+To generate this summary, you will be provided with three distinct sets of information:
+
+1. **Funding Opportunity Details: Found here: {!$RecordSnapshot:FundingOpportunity.Snapshot}
+  * Grant program name and purpose
+  * Eligibility criteria (applicant types, geographic scope, project types)
+  * Funding priorities and focus areas
+  * Available funding amount(s) and award limits (e.g., maximum grant per award)
+  * Application deadlines and key dates
+  * Required application components and submission guidelines
+  * Review criteria
+
+
+2. **Summary of Applications Received:** This will be a synthesized overview of the applications submitted for this specific funding opportunity, potentially including:
+  * Total number of applications received
+  * Breakdown of applicant types/organizations
+  * Geographic distribution of applicants
+  * Common themes or project areas proposed by applicants
+  * Any notable trends or patterns observed in the applications (e.g., highly competitive areas, unexpected types of proposals).
+{!$RelatedList:FundingOpportunity.IndividualApplications.Records}
+
+
+3. **Details of Previously Funded Awards (for this specific opportunity, if available):** This will offer insights into the funder&apos;s past decisions, potentially including:
+  * List of awarded projects (titles, brief descriptions)
+  * Award amounts and duration
+  * Names of recipient organizations/institutions
+  * Geographic distribution of awardees
+  * Alignment of funded projects with stated funding priorities
+  * Any discernible patterns in successful applications (e.g., emphasis on innovation, specific methodologies, certain target populations).
+{!$RelatedList:FundingOpportunity.FundingAwards.Records}
+
+**Your summary should be structured as follows:**
+
+**I. Overview of the Funding Opportunity:**
+  * Concisely state the funder, grant program, and its core purpose.
+  * Highlight the key funding priorities and eligibility requirements.
+  * Include the total available funding and application deadline.
+
+**II. Insights from Applications Received:**
+  * Report on the volume and diversity of applications.
+  * Describe any significant trends or themes identified across the submitted proposals, providing context on the competition.
+
+**III. Analysis of Funded Awards (if applicable):**
+  * Summarize the types of projects and organizations that have historically received funding.
+  * Identify any patterns in successful proposals regarding project focus, methodology, or scale.
+  * Articulate how past awards align with or further clarify the funder&apos;s priorities. If no awards are available, state that.
+
+**IV. Key Takeaways and Strategic Recommendations for Future Applicants:**
+  * Based on all provided information, offer strategic advice for potential applicants to maximize their chances of success. This should synthesize findings from the FOA, application trends, and award history.
+  * Include critical &quot;do&apos;s and don&apos;ts&quot; or areas to emphasize/avoid.
+
+**Output Format:** Use clear headings and bullet points for readability. The summary should be approximately 750-1000 words, balancing comprehensiveness with conciseness. Maintain a professional and analytical tone throughout.
+
+</content>
+        <inputs>
+            <apiName>objectToSummarize</apiName>
+            <definition>SOBJECT://FundingOpportunity</definition>
+            <referenceName>Input:FundingOpportunity</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>invocable://getRelatedList</definition>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>parentRecordId</parameterName>
+                <valueExpression>{!$Input:FundingOpportunity.Id}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>relatedListName</parameterName>
+                <valueExpression>IndividualApplications</valueExpression>
+            </parameters>
+            <referenceName>RelatedList:FundingOpportunity.IndividualApplications.Records</referenceName>
+        </templateDataProviders>
+        <templateDataProviders>
+            <definition>invocable://getRelatedList</definition>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>parentRecordId</parameterName>
+                <valueExpression>{!$Input:FundingOpportunity.Id}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>relatedListName</parameterName>
+                <valueExpression>FundingAwards</valueExpression>
+            </parameters>
+            <referenceName>RelatedList:FundingOpportunity.FundingAwards.Records</referenceName>
+        </templateDataProviders>
+        <templateDataProviders>
+            <definition>invocable://getDataForGrounding</definition>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>recordId</parameterName>
+                <valueExpression>{!$Input:FundingOpportunity.Id}</valueExpression>
+            </parameters>
+            <referenceName>RecordSnapshot:FundingOpportunity</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>s6M2uffSkJDJ5miyQiGRB+9EILpHI3h6gnRVP+9nhl0=_1</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__recordSummary</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

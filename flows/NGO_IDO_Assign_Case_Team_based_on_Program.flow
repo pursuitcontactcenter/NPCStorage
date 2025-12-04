@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>59.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>WHAT: Flow to assign a Case Team when a Care Plan is assigned to the case, based on the Program.
+WHO: Brian Ricter | Q Branch
+WHEN: 242.1</description>
+    <environments>Default</environments>
+    <formulas>
+        <description>Determines the Case Team name based on the Care Plan name</description>
+        <name>teamNameFormula</name>
+        <dataType>String</dataType>
+        <expression>SUBSTITUTE({!$Record.CarePlanTemplate.Name},&quot; Care Plan Template&quot;, &quot; Team&quot;)</expression>
+    </formulas>
+    <interviewLabel>NGO IDO - Assign Case Team based on Program {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>NGO IDO - Assign Case Team based on Program</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Add_Case_Team_to_Case</name>
+        <label>Add Case Team to Case</label>
+        <locationX>176</locationX>
+        <locationY>455</locationY>
+        <inputAssignments>
+            <field>ParentId</field>
+            <value>
+                <elementReference>$Record.CaseId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TeamTemplateId</field>
+            <value>
+                <elementReference>Lookup_Predefined_Case_Team.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>CaseTeamTemplateRecord</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <name>Lookup_Predefined_Case_Team</name>
+        <label>Lookup Predefined Case Team</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Add_Case_Team_to_Case</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>teamNameFormula</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>CaseTeamTemplate</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Lookup_Predefined_Case_Team</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>CaseId</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>CarePlan</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>

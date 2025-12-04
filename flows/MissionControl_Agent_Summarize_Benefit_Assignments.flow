@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Gather_Details</name>
+        <elementSubtype>AddPromptInstructions</elementSubtype>
+        <label>Gather Details</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Output.Prompt</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>{!Summarize}
+</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop</targetReference>
+        </connector>
+    </assignments>
+    <description>Pull a list of Benefit Assignments for this client and list in bulleted format</description>
+    <environments>Default</environments>
+    <interviewLabel>Mission Control Agent Summarize Benefit Assignments {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Mission Control Agent - Summarize Benefit Assignments</label>
+    <loops>
+        <name>Loop</name>
+        <label>Loop</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>Get_Benefit_Assignments</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Gather_Details</targetReference>
+        </nextValueConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>PromptFlow</processType>
+    <recordLookups>
+        <name>Get_Benefit_Assignments</name>
+        <label>Get Benefit Assignments</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>EnrolleeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>currentRecordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>BenefitAssignment</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Benefit_Assignments</targetReference>
+        </connector>
+        <triggerType>Capability</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>Summarize</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;{!Loop.Benefit.Name}: &lt;/strong&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Status - {!Loop.Status}&lt;/li&gt;&lt;li&gt;Unit of Measure -&lt;strong&gt; &lt;/strong&gt;{!Loop.UnitOfMeasure.Name}&lt;/li&gt;&lt;/ul&gt;</text>
+    </textTemplates>
+    <variables>
+        <name>currentRecordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

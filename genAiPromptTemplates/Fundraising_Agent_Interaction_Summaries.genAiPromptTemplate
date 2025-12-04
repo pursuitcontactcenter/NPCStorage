@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>5QQdLGKQMCL8V0WYgCLQe1znxkufYPnfpi2pbnAcSbU=_1</activeVersionIdentifier>
+    <description>Review and summarize insights from Interaction Summary records</description>
+    <developerName>Fundraising_Agent_Interaction_Summaries</developerName>
+    <masterLabel>Fundraising Agent: Interaction Summaries</masterLabel>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSON representing Interaction Summaries with a donor. Highlight any feedback provided by the donor, as well as any identified next steps for internal staff.
+
+Interaction Summaries: {!$Input:jsonInput}
+</content>
+        <inputs>
+            <apiName>jsonInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>jsonInput</masterLabel>
+            <referenceName>Input:jsonInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>5QQdLGKQMCL8V0WYgCLQe1znxkufYPnfpi2pbnAcSbU=_1</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSON representing Interaction Summaries with a donor. Highlight any feedback provided by the donor, as well as any identified next steps for internal staff.
+
+Interaction Summaries: {!$Input:jsonInput}
+</content>
+        <inputs>
+            <apiName>jsonInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>jsonInput</masterLabel>
+            <referenceName>Input:jsonInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Draft</status>
+        <versionIdentifier>5QQdLGKQMCL8V0WYgCLQe1znxkufYPnfpi2pbnAcSbU=_2</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

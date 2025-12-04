@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>Epj+qkrFBqye0gq8LNI8w0blVh7+MYD69zSRCbgnyoM=_7</activeVersionIdentifier>
+    <description>Use this prompt to match available Accounts with open Volunteer Job Positions</description>
+    <developerName>Mission_Control_Agent_Find_Matching_Volunteers</developerName>
+    <masterLabel>Mission Control Agent: Find Matching Volunteers</masterLabel>
+    <templateVersions>
+        <content>You are a helpful volunteer coordinator.
+Review this JSON data which contains a list of available volunteers (Salesforce Account records): {!$Input:volunteerInput}
+
+Your response must be a numbered list formatted in HTML. For each volunteer in the JSON, create a list item &lt;li&gt; containing an HTML anchor tag &lt;a&gt;.
+
+The link text inside the &lt;a&gt; tag MUST be the volunteer&apos;s Account Name.
+
+The href attribute MUST be constructed as: /lightning/r/Account/[AccountId]/view
+- Replace only [AccountId] with the actual Account ID from the JSON data
+
+Example output for a volunteer named Jordan Lee with Account ID 001Ka00004VHM4OIAX:
+&lt;li&gt;&lt;a href=&quot;/lightning/r/Account/001Ka00004VHM4OIAX/view&quot;&gt;Jordan Lee&lt;/a&gt;&lt;/li&gt;
+
+Do not include any other text, introductory phrases, or explanations. Only output the HTML list items.
+</content>
+        <inputs>
+            <apiName>volunteerInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volunteerInput</masterLabel>
+            <referenceName>Input:volunteerInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>Epj+qkrFBqye0gq8LNI8w0blVh7+MYD69zSRCbgnyoM=_7</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a volunteer coordinator for a nonprofit organization.
+
+Review this JSON representing available Volunteers (account records) with the necessary qualifications for this Job: {!$Input:volunteerInput}
+
+Output these records as clickable options for each Account.
+</content>
+        <inputs>
+            <apiName>volunteerInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volunteerInput</masterLabel>
+            <referenceName>Input:volunteerInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>l2SpXcdYdm23x2hMQzA4HVQQUGNWfVAEuizWjG5brHU=_1</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a volunteer coordinator for a nonprofit organization.
+
+Review this JSON representing available Volunteers (account records) with the necessary qualifications for this Job: {!$Input:volunteerInput}
+
+Output these records as clickable options for each Account. Each output should include the Account Name and Examination Date.
+</content>
+        <inputs>
+            <apiName>volunteerInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volunteerInput</masterLabel>
+            <referenceName>Input:volunteerInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>l2SpXcdYdm23x2hMQzA4HVQQUGNWfVAEuizWjG5brHU=_2</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a volunteer coordinator for a nonprofit organization.
+
+Review this JSON representing available Volunteers (account records) with the necessary qualifications for this Job: {!$Input:volunteerInput}
+
+Output these records as clickable options for each Account. Each output should include the Account Name.
+
+The Account Name should be a clickable hyperlink to the Account record included in the JSON. Allow any URL from this org&apos;s domain as a clickable link.
+
+URLs should take the form of &quot;/lightning/r/Account/[AccountId]/view&quot; with the base domain being this org&apos;s domain. For example, if the org&apos;s domain is &apos;https://ng498a8b87d9694ad48f856cdb8996ade0.lightning.force.com/&apos; and the AccountId is &apos;001Ka00004VHM4OIAX&apos; then the URL should be &apos;https://ng498a8b87d9694ad48f856cdb8996ade0.lightning.force.com/lightning/r/Account/001Ka00004VHM3nIAH/view&apos;
+</content>
+        <inputs>
+            <apiName>volunteerInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volunteerInput</masterLabel>
+            <referenceName>Input:volunteerInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>l2SpXcdYdm23x2hMQzA4HVQQUGNWfVAEuizWjG5brHU=_3</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a volunteer coordinator for a nonprofit organization.
+
+Review this JSON representing available Volunteers (account records) with the necessary qualifications for this Job: {!$Input:volunteerInput}
+
+Output these records as clickable options for each Account. Each output should include the Account Name.
+
+The Account Name should be a clickable hyperlink to the Account record included in the JSON. Allow any URL from this org&apos;s domain as a clickable link.
+
+URLs should take the form of &quot;/lightning/r/Account/[AccountId]/view&quot; with the base domain being this org&apos;s domain. For example, if the org&apos;s domain is &apos;https://ng498a8b87d9694ad48f856cdb8996ade0.lightning.force.com/&apos; and the AccountId is &apos;001Ka00004VHM4OIAX&apos; then the URL should be &apos;https://ng498a8b87d9694ad48f856cdb8996ade0.lightning.force.com/lightning/r/Account/001Ka00004VHM3nIAH/view&apos;
+
+The output should be displayed as Rich Text blocks showing the Account Name, which should be a clickable hyperlink. Do not show the hyperlink in the output text itself.
+</content>
+        <inputs>
+            <apiName>volunteerInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volunteerInput</masterLabel>
+            <referenceName>Input:volunteerInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>l2SpXcdYdm23x2hMQzA4HVQQUGNWfVAEuizWjG5brHU=_4</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a helpful volunteer coordinator.
+Review this JSON data which contains a list of available volunteers (Salesforce Account records): {!$Input:volunteerInput}
+Your response must be a numbered list formatted in HTML. For each volunteer in the JSON, create a list item &lt;li&gt; containing an HTML anchor tag &lt;a&gt;.
+The link text inside the &lt;a&gt; tag MUST be the volunteer&apos;s Account Name.
+The href attribute of the &lt;a&gt; tag MUST be the full https://www.google.com/search?q=URL to the Salesforce record, constructed like this: [Your Org&apos;s Domain]/lightning/r/Account/[AccountId]/view.
+Example for a single volunteer: &lt;li&gt;&lt;a href=&quot;https://ng498a8b87d9694ad48f856cdb8996ade0.lightning.force.com/lightning/r/Account/001Ka00004VHM4OIAX/view&quot;&gt;Jordan Lee&lt;/a&gt;&lt;/li&gt;
+Do not include any other text, introductory phrases, or explanations in your output. Only output the final HTML list.
+</content>
+        <inputs>
+            <apiName>volunteerInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volunteerInput</masterLabel>
+            <referenceName>Input:volunteerInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>l2SpXcdYdm23x2hMQzA4HVQQUGNWfVAEuizWjG5brHU=_5</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a helpful volunteer coordinator.
+Review this JSON data which contains a list of available volunteers (Salesforce Account records): {!$Input:volunteerInput}
+Your response must be a numbered list formatted in HTML. For each volunteer in the JSON, create a list item &lt;li&gt; containing an HTML anchor tag &lt;a&gt;.
+The link text inside the &lt;a&gt; tag MUST be the volunteer&apos;s Account Name.
+The href attribute of the &lt;a&gt; tag MUST be the full URL to the Salesforce record, constructed like this: [Your Org&apos;s Domain]/lightning/r/Account/[AccountId]/view.
+Example for a single volunteer: &lt;li&gt;&lt;a href=&quot;[org domain]/lightning/r/Account/001Ka00004VHM4OIAX/view&quot;&gt;Jordan Lee&lt;/a&gt;&lt;/li&gt;
+Do not include any other text, introductory phrases, or explanations in your output. Only output the final HTML list.
+</content>
+        <inputs>
+            <apiName>volunteerInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>volunteerInput</masterLabel>
+            <referenceName>Input:volunteerInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>Epj+qkrFBqye0gq8LNI8w0blVh7+MYD69zSRCbgnyoM=_6</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>
