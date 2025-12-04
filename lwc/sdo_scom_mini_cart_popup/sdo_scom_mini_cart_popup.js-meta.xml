@@ -8,7 +8,8 @@
 	<targetConfigs>
         <targetConfig targets="lightningCommunity__Default">
             <property name="showCount" type="Boolean"/>
-            <property name="countType" type="String" datasource="java://siteforce.communitybuilder.datasource.B2BCartCountDataSource" default="TotalProductCount"/>
+             <!-- Removed countType datasource because it breaks deployment -->
+            <!-- <property name="countType" type="String" datasource="java://siteforce.communitybuilder.datasource.B2BCartCountDataSource" default="TotalProductCount"/> -->
             <property name="iconLinkColor" type="Color"/>
             <property name="iconLinkHoverColor" type="Color"/>
         </targetConfig>
