@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>5QQdLGKQMCL8V0WYgCLQe1znxkufYPnfpi2pbnAcSbU=_1</activeVersionIdentifier>
+    <developerName>Fundraising_Agent_Summarize_Interests</developerName>
+    <masterLabel>Fundraising Agent: Summarize Interests</masterLabel>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSON representing Topic Assignments, also known as Interest Tags or Interests, with a donor. 
+Interests: {!$Input:jsonInput}
+
+Summarize these interests, and present a fundraising strategy for engaging the donor around each identified interest.
+</content>
+        <inputs>
+            <apiName>jsonInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>jsonInput</masterLabel>
+            <referenceName>Input:jsonInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>5QQdLGKQMCL8V0WYgCLQe1znxkufYPnfpi2pbnAcSbU=_1</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>+fyE6ntAcqwlrijtlgcYpolnsUKalQ2OvcLVRgphjNc=_1</activeVersionIdentifier>
+    <developerName>Mission_Control_Agent_Program_Interests</developerName>
+    <masterLabel>Mission Control Agent: Program &amp; Interests</masterLabel>
+    <templateVersions>
+        <content>You are a nonprofit program coordinator helping align Programs to the interests of your organization&apos;s donors.
+
+Review this JSON representing a donor&apos;s interests: {!$Input:interestInput}
+Review this JSON representing available Programs: {!$Input:programInput}
+
+Determine the Program that would be most applicable to this donor&apos;s Interest. Output that decision as follows:
+
+Best Match: [Program Name]
+This is the best match for this donor because [brief explanation of reasoning]
+</content>
+        <inputs>
+            <apiName>interestInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>interestInput</masterLabel>
+            <referenceName>Input:interestInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>programInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>programInput</masterLabel>
+            <referenceName>Input:programInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>+fyE6ntAcqwlrijtlgcYpolnsUKalQ2OvcLVRgphjNc=_1</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>Epj+qkrFBqye0gq8LNI8w0blVh7+MYD69zSRCbgnyoM=_2</activeVersionIdentifier>
+    <developerName>Mission_Control_Agent_Get_Volunteer_Positions</developerName>
+    <masterLabel>Mission Control Agent: Get Volunteer Positions</masterLabel>
+    <templateVersions>
+        <content>You are a program manager and volunteer coordinator for a nonprofit organization.
+
+Review this JSON representing open volunteer positions for a specific volunteer initiative: {!$Input:positionInput}
+
+Output a description of the top two current open positions, including any required qualifications. Order the positions by rank of importance; a position with the role of &quot;Leader&quot; is more important than a role of &quot;General Volunteer&quot;, for example. If the role requires a qualification, it should be more important than a role with no required qualifications.
+
+Output as the following:
+
+Most critical role:
+Role: [Name]
+Description: [Title]
+Required qualifications: [related Qualification Name]
+
+Additional role:
+Role: [Name]
+Description: [Title]
+Required qualifications: [related Qualification Name]
+</content>
+        <inputs>
+            <apiName>positionInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>positionInput</masterLabel>
+            <referenceName>Input:positionInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>Epj+qkrFBqye0gq8LNI8w0blVh7+MYD69zSRCbgnyoM=_2</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a program manager and volunteer coordinator for a nonprofit organization.
+
+Review this JSON representing open volunteer positions for a specific volunteer initiative: {!$Input:positionInput}
+
+Output a description of current open positions, including any required qualifications.
+</content>
+        <inputs>
+            <apiName>positionInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>positionInput</masterLabel>
+            <referenceName>Input:positionInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>l2SpXcdYdm23x2hMQzA4HVQQUGNWfVAEuizWjG5brHU=_1</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

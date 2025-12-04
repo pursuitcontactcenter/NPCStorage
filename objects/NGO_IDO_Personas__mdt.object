@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>WHAT: Custom Metadata for storing IDs of hero records and demo personas. This is used for org configuration updates.
+WHO: Brian Ricter | Q Branch
+WHEN: 242.1</description>
+    <fields>
+        <fullName>Demo_Story__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Demo Story</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>true</sorted>
+                <value>
+                    <fullName>Crisis &amp; Trauma Support</fullName>
+                    <default>true</default>
+                    <label>Crisis &amp; Trauma Support</label>
+                </value>
+                <value>
+                    <fullName>Employment</fullName>
+                    <default>false</default>
+                    <label>Employment</label>
+                </value>
+                <value>
+                    <fullName>Food Access</fullName>
+                    <default>false</default>
+                    <label>Food Access</label>
+                </value>
+                <value>
+                    <fullName>Housing</fullName>
+                    <default>false</default>
+                    <label>Housing</label>
+                </value>
+                <value>
+                    <fullName>Mental Health</fullName>
+                    <default>false</default>
+                    <label>Mental Health</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>External_Id__c</fullName>
+        <description>This is the External Id of the record itself, not of this metadata entry.</description>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <inlineHelpText>This is the External Id of the record itself, not of this metadata entry.</inlineHelpText>
+        <label>External Id</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_of_Record__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Name of Record</label>
+        <length>254</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sort_Order__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Sort Order</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Target_Type__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Target Type</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>ListView</fullName>
+                    <default>true</default>
+                    <label>ListView</label>
+                </value>
+                <value>
+                    <fullName>Record</fullName>
+                    <default>false</default>
+                    <label>Record</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>NGO IDO Personas</label>
+    <pluralLabel>NGO IDO Personas</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

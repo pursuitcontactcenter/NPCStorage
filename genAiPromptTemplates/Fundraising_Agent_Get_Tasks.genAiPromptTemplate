@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>5QQdLGKQMCL8V0WYgCLQe1znxkufYPnfpi2pbnAcSbU=_2</activeVersionIdentifier>
+    <description>Query open tasks related to a donor&apos;s Account record</description>
+    <developerName>Fundraising_Agent_Get_Tasks</developerName>
+    <masterLabel>Fundraising Agent: Get Tasks</masterLabel>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSON representing Tasks related to a donor. 
+Tasks: {!$Input:jsonInput}
+
+Present the output in the following manner, organized chronologically by DueDate starting with the next upcoming date.
+
+&quot;Task: [subject]
+Due Date: [dueDate]
+
+[insert carriage return between records]
+
+Task: [subject]
+Due Date: [dueDate]&quot;
+</content>
+        <inputs>
+            <apiName>jsonInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>jsonInput</masterLabel>
+            <referenceName>Input:jsonInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>5QQdLGKQMCL8V0WYgCLQe1znxkufYPnfpi2pbnAcSbU=_2</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a fundraising and donor management specialist at a nonprofit organization. Review the following JSON representing Tasks related to a donor. 
+Tasks: {!$Input:jsonInput}
+
+Present the output in the following manner, organized chronologically by DueDate starting with the next upcoming date.
+
+&quot;Task: [subject]
+Due Date: [dueDate]
+Description: [Description]
+
+[insert carriage return between records]
+
+Task: [subject]
+Due Date: [dueDate]
+Description: [Description]&quot;
+</content>
+        <inputs>
+            <apiName>jsonInput</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>jsonInput</masterLabel>
+            <referenceName>Input:jsonInput</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>5QQdLGKQMCL8V0WYgCLQe1znxkufYPnfpi2pbnAcSbU=_1</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>
