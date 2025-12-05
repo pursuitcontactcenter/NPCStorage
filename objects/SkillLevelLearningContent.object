@@ -9,9 +9,9 @@
     <fields>
         <fullName>EffectiveStartDate</fullName>
     </fields>
-    <fields>
+    <!--<fields>
         <fullName>LearningContentId</fullName>
-    </fields>
+    </fields>-->
     <fields>
         <fullName>SkillLevelDefinitionId</fullName>
         <type>MasterDetail</type>
