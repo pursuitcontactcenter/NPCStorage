@@ -259,7 +259,7 @@
         <fields>ReferralDate</fields>
         <fields>Status</fields>
         <fields>ReferralType</fields>
-        <relatedList>ClientReferrals</relatedList>
+        <!--<relatedList>ClientReferrals</relatedList>-->
     </relatedLists>
     <relatedLists>
         <fields>Name</fields>
