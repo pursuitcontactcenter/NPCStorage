@@ -261,7 +261,7 @@
         <fields>ReferralType</fields>
         <fields>ReferralDate</fields>
         <fields>Status</fields>
-        <relatedList>CaseReferrals</relatedList>
+        <!--<relatedList>CaseReferrals</relatedList>-->
     </relatedLists>
     <relatedLists>
         <fields>Name</fields>
