@@ -1448,7 +1448,7 @@
         <fields>ReferralType</fields>
         <fields>ReferralDate</fields>
         <fields>Status</fields>
-        <relatedList>ProviderReferrals</relatedList>
+        <!--<relatedList>ProviderReferrals</relatedList>-->
     </relatedLists>
     <relatedLists>
         <fields>Name</fields>
