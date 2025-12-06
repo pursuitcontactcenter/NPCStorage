@@ -1803,7 +1803,7 @@
         <fields>ReferralType</fields>
         <fields>ReferralDate</fields>
         <fields>Status</fields>
-        <relatedList>ReferrerReferrals</relatedList>
+        <!--<relatedList>ReferrerReferrals</relatedList>-->
     </relatedLists>
     <relatedLists>
         <fields>Name</fields>
